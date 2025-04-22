@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_symposiums"
-        android:name="com.ebcf.jnab.ui.symposiums.Symposiums"
+        android:name="com.ebcf.jnab.ui.view.SymposiumsListFragment"
         android:label="@string/title_symposiums"
-        tools:layout="@layout/fragment_symposiums" />
+        tools:layout="@layout/fragment_symposiums_list" />
 </navigation>
