@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_symposiums"
+        android:title="@string/title_symposiums" />
+
+    <item
+        android:id="@+id/navigation_agenda"
+        android:title="@string/title_agenda" />
+
+    <item
+        android:id="@+id/navigation_speaker"
+        android:title="@string/title_speakers" />
+
+</menu>
