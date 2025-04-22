@@ -1,22 +1,22 @@
-package com.ebcf.jnab.ui.symposiums
+package com.ebcf.jnab.ui.view.adapter
 
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.ebcf.jnab.data.model.Symposium
+import com.ebcf.jnab.data.model.SymposiumModel
 import com.ebcf.jnab.databinding.ItemSymposiumBinding
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-class SymposiumsAdapter(private val symposiums: List<Symposium>) :
-    RecyclerView.Adapter<SymposiumsAdapter.SymposiumViewHolder>() {
+class SymposiumsListAdapter(private val symposiums: List<SymposiumModel>) :
+    RecyclerView.Adapter<SymposiumsListAdapter.SymposiumViewHolder>() {
 
     class SymposiumViewHolder(private val binding: ItemSymposiumBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
-        fun bind(symposium: Symposium) {
+        fun bind(symposium: SymposiumModel) {
             binding.symposiumTitle.text = symposium.title
 
 

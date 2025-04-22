@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.symposiums
+package com.ebcf.jnab.ui.view
 
 import android.os.Build
 import android.os.Bundle
@@ -9,11 +9,13 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ebcf.jnab.databinding.FragmentSymposiumsBinding
+import com.ebcf.jnab.databinding.FragmentSymposiumsListBinding
+import com.ebcf.jnab.ui.view.adapter.SymposiumsListAdapter
+import com.ebcf.jnab.ui.viewmodel.SymposiumsListViewModel
 
-class Symposiums : Fragment() {
+class SymposiumsListFragment : Fragment() {
 
-    private var _binding: FragmentSymposiumsBinding? = null
+    private var _binding: FragmentSymposiumsListBinding? = null
     private val binding get() = _binding!!
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -22,10 +24,10 @@ class Symposiums : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val symposiumsViewModel =
-            ViewModelProvider(this).get(SymposiumsViewModel::class.java)
+        val symposiumsListViewModel =
+            ViewModelProvider(this).get(SymposiumsListViewModel::class.java)
 
-        _binding = FragmentSymposiumsBinding.inflate(inflater, container, false)
+        _binding = FragmentSymposiumsListBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         // Set up RecyclerView
@@ -33,8 +35,8 @@ class Symposiums : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         // Observe ViewModel for symposiums list
-        symposiumsViewModel.symposiums.observe(viewLifecycleOwner) { symposiums ->
-            recyclerView.adapter = SymposiumsAdapter(symposiums)
+        symposiumsListViewModel.symposiums.observe(viewLifecycleOwner) { symposiums ->
+            recyclerView.adapter = SymposiumsListAdapter(symposiums)
         }
 
         return root
