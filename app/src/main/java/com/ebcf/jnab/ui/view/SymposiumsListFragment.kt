@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebcf.jnab.databinding.FragmentSymposiumsListBinding
+import com.ebcf.jnab.domain.usecase.FormatDateUseCase
 import com.ebcf.jnab.ui.view.adapter.SymposiumsListAdapter
 import com.ebcf.jnab.ui.viewmodel.SymposiumsListViewModel
 
@@ -24,19 +25,22 @@ class SymposiumsListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val symposiumsListViewModel =
-            ViewModelProvider(this).get(SymposiumsListViewModel::class.java)
-
         _binding = FragmentSymposiumsListBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        // Set up RecyclerView
+        // Crear el ViewModel sin Factory
+        val symposiumsListViewModel = ViewModelProvider(this).get(SymposiumsListViewModel::class.java)
+
+        // Crear una instancia del caso de uso
+        val formatDateUseCase = FormatDateUseCase()
+
+        // Configurar RecyclerView
         val recyclerView = binding.recyclerViewSymposiums
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        // Observe ViewModel for symposiums list
+        // Observar ViewModel para la lista de simposios
         symposiumsListViewModel.symposiums.observe(viewLifecycleOwner) { symposiums ->
-            recyclerView.adapter = SymposiumsListAdapter(symposiums)
+            recyclerView.adapter = SymposiumsListAdapter(symposiums, formatDateUseCase)
         }
 
         return root
