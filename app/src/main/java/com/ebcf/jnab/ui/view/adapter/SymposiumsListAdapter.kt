@@ -7,25 +7,18 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.ebcf.jnab.data.model.SymposiumModel
 import com.ebcf.jnab.databinding.ItemSymposiumBinding
-import java.time.format.DateTimeFormatter
-import java.util.Locale
+import com.ebcf.jnab.domain.usecase.FormatDateUseCase
 
-class SymposiumsListAdapter(private val symposiums: List<SymposiumModel>) :
+class SymposiumsListAdapter(private val symposiums: List<SymposiumModel>,
+                            private val formatDateUseCase: FormatDateUseCase) :
     RecyclerView.Adapter<SymposiumsListAdapter.SymposiumViewHolder>() {
 
     class SymposiumViewHolder(private val binding: ItemSymposiumBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
-        fun bind(symposium: SymposiumModel) {
+        fun bind(symposium: SymposiumModel, formatDateUseCase: FormatDateUseCase) {
             binding.symposiumTitle.text = symposium.title
-
-
-            val formatter = DateTimeFormatter.ofPattern(
-                "d 'de' MMMM 'de' yyyy, HH:mm 'hs'",
-                Locale("es", "ES")
-            )
-            binding.dateTime.text = symposium.dateTime.format(formatter)
-
+            binding.dateTime.text = formatDateUseCase.execute(symposium.dateTime)
         }
     }
 
@@ -38,7 +31,7 @@ class SymposiumsListAdapter(private val symposiums: List<SymposiumModel>) :
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: SymposiumViewHolder, position: Int) {
-        holder.bind(symposiums[position])
+        holder.bind(symposiums[position], formatDateUseCase)
     }
 
     override fun getItemCount(): Int = symposiums.size
