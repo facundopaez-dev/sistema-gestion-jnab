@@ -10,7 +10,7 @@
         android:title="@string/title_agenda" />
 
     <item
-        android:id="@+id/navigation_speaker"
+        android:id="@+id/navigation_speakers"
         android:title="@string/title_speakers" />
 
 </menu>
