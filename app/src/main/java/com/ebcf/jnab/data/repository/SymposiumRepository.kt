@@ -83,7 +83,7 @@ class SymposiumRepository {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun getAll(): List<SymposiumModel> {
-        return hardcodedSymposia
+        return hardcodedSymposia.sortedBy { it.dateTime }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
