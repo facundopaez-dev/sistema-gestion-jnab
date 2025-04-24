@@ -5,12 +5,19 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/navigation_symposiums">
 
-    <!-- Fragmento de simposios -->
+    <!-- Fragmento de simposios proximos -->
     <fragment
         android:id="@+id/navigation_symposiums"
         android:name="com.ebcf.jnab.ui.view.SymposiumsListFragment"
         android:label="@string/title_symposiums"
         tools:layout="@layout/fragment_symposiums_list" />
+
+    <!-- Fragmento de todos (pasados y proximos) los simposios (agenda) -->
+    <fragment
+        android:id="@+id/navigation_agenda"
+        android:name="com.ebcf.jnab.ui.view.AllSymposiumsListFragment"
+        android:label="Agenda"
+        tools:layout="@layout/fragment_all_symposiums_list" />
 
     <!-- Fragmento de expositores -->
     <fragment
