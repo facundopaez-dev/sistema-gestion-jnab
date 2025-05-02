@@ -5,6 +5,12 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/navigation_symposiums">
 
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.ebcf.jnab.ui.login.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login" />
+
     <!-- Fragmento de simposios proximos -->
     <fragment
         android:id="@+id/navigation_symposiums"
