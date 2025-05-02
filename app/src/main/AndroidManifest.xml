@@ -24,4 +24,12 @@
         </activity>
     </application>
 
+    <!-- Permiso necesario para que una biblioteca (como la de Firebase) se
+       conecte a sus servidores -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Permite a Firebase (y otras bibliotecas) verificar el estado de la red,
+       por ejemplo, para manejar errores si no hay conexion -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 </manifest>

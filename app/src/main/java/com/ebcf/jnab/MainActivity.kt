@@ -9,7 +9,6 @@ import com.ebcf.jnab.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.ui.setupWithNavController
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_symposiums, R.id.navigation_agenda, R.id.navigation_speakers
+                R.id.navigation_login, R.id.navigation_symposiums, R.id.navigation_agenda, R.id.navigation_speakers
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
