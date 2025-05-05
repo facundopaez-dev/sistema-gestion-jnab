@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebcf.jnab.databinding.FragmentSymposiumsListBinding
 import com.ebcf.jnab.domain.usecase.FormatDateUseCase
@@ -40,9 +41,11 @@ class SymposiumsListFragment : Fragment() {
 
         // Observar ViewModel para la lista de simposios
         symposiumsListViewModel.symposiums.observe(viewLifecycleOwner) { symposiums ->
-            recyclerView.adapter = SymposiumsListAdapter(symposiums, formatDateUseCase)
+            recyclerView.adapter = SymposiumsListAdapter(symposiums, formatDateUseCase) { symposium ->
+                val action = SymposiumsListFragmentDirections.actionNavigationSymposiumsToTalksListFragment(symposium.id)
+                findNavController().navigate(action)
+            }
         }
-
         return root
     }
 

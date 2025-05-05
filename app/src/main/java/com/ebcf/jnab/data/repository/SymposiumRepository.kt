@@ -10,52 +10,62 @@ class SymposiumRepository {
     @RequiresApi(Build.VERSION_CODES.O)
     private val hardcodedSymposia = listOf(
         SymposiumModel(
-            title = "Antropología Biológica 2025",
+            id = 1,
+            title   = "Antropología Biológica 2025",
             description = "Un simposio sobre avances en la investigación de la antropología biológica.",
             dateTime = LocalDateTime.of(2025, 4, 22, 9, 0)
         ),
         SymposiumModel(
-            title = "Evolución Humana",
+            id = 1,
+            title   = "Evolución Humana",
             description = "Simposio que cubre temas relacionados con la evolución humana.",
             dateTime = LocalDateTime.of(2025, 4, 23, 10, 0)
         ),
         SymposiumModel(
-            title = "Biodiversidad Humana",
+            id = 1,
+            title   = "Biodiversidad Humana",
             description = "Un análisis sobre la biodiversidad en los seres humanos.",
             dateTime = LocalDateTime.of(2025, 4, 23, 14, 0)
         ),
         SymposiumModel(
-            title = "Genómica y Adaptación Humana",
+            id = 1,
+            title  = "Genómica y Adaptación Humana",
             description = "Exploración de cómo la genómica ha influido en la adaptación humana.",
             dateTime = LocalDateTime.of(2025, 4, 24, 11, 30)
         ),
         SymposiumModel(
-            title = "Simposio de Paleontología y Comportamiento",
+            id = 1,
+            title  = "Simposio de Paleontología y Comportamiento",
             description = "Discusión sobre el comportamiento humano a través de hallazgos paleontológicos.",
             dateTime = LocalDateTime.of(2025, 4, 25, 13, 0)
         ),
         SymposiumModel(
-            title = "Migraciones Humanas Antiguas",
+            id = 1,
+            title  = "Migraciones Humanas Antiguas",
             description = "Estudio de las migraciones humanas prehistóricas y su impacto genético.",
             dateTime = LocalDateTime.of(2025, 4, 25, 18, 30)
         ),
         SymposiumModel(
-            title = "Simposio de Antropología Forense",
+            id = 1,
+            title  = "Simposio de Antropología Forense",
             description = "Avances en técnicas forenses para el estudio de restos humanos.",
             dateTime = LocalDateTime.of(2025, 4, 26, 9, 0)
         ),
         SymposiumModel(
-            title = "Evolución de la Dieta Humana",
+            id = 1,
+            title  = "Evolución de la Dieta Humana",
             description = "Cómo la dieta ha moldeado la evolución humana a lo largo del tiempo.",
             dateTime = LocalDateTime.of(2025, 4, 26, 13, 0)
         ),
         SymposiumModel(
-            title = "Simposio de Epigenética Humana",
+            id = 1,
+            title  = "Simposio de Epigenética Humana",
             description = "Exploración de la epigenética y su rol en la variación humana.",
             dateTime = LocalDateTime.of(2025, 4, 26, 16, 30)
         ),
         SymposiumModel(
-            title = "Diversidad Cultural y Biológica",
+            id = 1,
+            title  = "Diversidad Cultural y Biológica",
             description = "Relación entre la diversidad cultural y la biología humana.",
             dateTime = LocalDateTime.of(2025, 4, 26, 18, 0)
         )

@@ -40,7 +40,7 @@ class AllSymposiumsListFragment : Fragment() {
 
         // Observar ViewModel para la lista de simposios
         allSymposiumsListViewModel.symposiums.observe(viewLifecycleOwner) { symposiums ->
-            recyclerView.adapter = SymposiumsListAdapter(symposiums, formatDateUseCase)
+            recyclerView.adapter = SymposiumsListAdapter(symposiums, formatDateUseCase , {}) //TODO cambiar esto
         }
 
         return root

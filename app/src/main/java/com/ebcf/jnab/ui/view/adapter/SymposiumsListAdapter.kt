@@ -9,9 +9,12 @@ import com.ebcf.jnab.data.model.SymposiumModel
 import com.ebcf.jnab.databinding.ItemSymposiumBinding
 import com.ebcf.jnab.domain.usecase.FormatDateUseCase
 
-class SymposiumsListAdapter(private val symposiums: List<SymposiumModel>,
-                            private val formatDateUseCase: FormatDateUseCase) :
-    RecyclerView.Adapter<SymposiumsListAdapter.SymposiumViewHolder>() {
+class SymposiumsListAdapter(
+    private val symposiums: List<SymposiumModel>,
+    private val formatDateUseCase: FormatDateUseCase,
+    private val onItemClick: (SymposiumModel) -> Unit
+
+) : RecyclerView.Adapter<SymposiumsListAdapter.SymposiumViewHolder>() {
 
     class SymposiumViewHolder(private val binding: ItemSymposiumBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -31,7 +34,11 @@ class SymposiumsListAdapter(private val symposiums: List<SymposiumModel>,
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: SymposiumViewHolder, position: Int) {
-        holder.bind(symposiums[position], formatDateUseCase)
+        val symposium = symposiums[position]
+        holder.bind(symposium, formatDateUseCase)
+        holder.itemView.setOnClickListener {
+            onItemClick(symposium)
+        }
     }
 
     override fun getItemCount(): Int = symposiums.size
