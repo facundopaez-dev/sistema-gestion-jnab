@@ -1,41 +1,57 @@
 package com.ebcf.jnab
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
+import com.ebcf.jnab.data.model.UserRole
 import com.ebcf.jnab.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.navigation.ui.setupWithNavController
+import com.ebcf.jnab.ui.login.LoginViewModel
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Infla el layout principal usando ViewBinding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navView: BottomNavigationView = binding.navView
+        var viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_login, R.id.navigation_symposiums, R.id.navigation_agenda, R.id.navigation_speakers
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
-
+        // Observa el resultado del login desde el ViewModel
+        viewModel.loginResult.observe(this, Observer { result ->
+            if (result.success) {
+                // Si el inicio de sesion es exitoso, se navega segun el rol del usuario
+                navigateBasedOnRole(result.role)
+            }
+        })
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        return navController.navigateUp() || super.onSupportNavigateUp()
+    private fun navigateBasedOnRole(roleFromFirebase: String) {
+        val navController = findNavController(R.id.nav_host_fragment)
+        val role = UserRole.fromValue(roleFromFirebase)
+
+        when (role) {
+            UserRole.ASSISTANT -> {
+                navController.navigate(R.id.action_loginFragment_to_assistantFragment)
+            }
+
+            UserRole.SPEAKER -> {
+                navController.navigate(R.id.action_loginFragment_to_speakerFragment)
+            }
+
+            UserRole.ORGANIZER -> {
+                navController.navigate(R.id.action_loginFragment_to_organizerFragment)
+            }
+
+            else -> {
+                Toast.makeText(this, "Rol no reconocido", Toast.LENGTH_LONG).show()
+            }
+        }
     }
+
 }
