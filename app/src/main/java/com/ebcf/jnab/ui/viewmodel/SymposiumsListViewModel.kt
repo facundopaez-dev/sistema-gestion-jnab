@@ -14,7 +14,7 @@ class SymposiumsListViewModel : ViewModel() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private val _symposiums = MutableLiveData<List<SymposiumModel>>().apply {
-        value = repository.getNextSymposiums()
+        value = repository.getAll()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

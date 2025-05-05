@@ -11,25 +11,36 @@
         android:label="Login"
         tools:layout="@layout/fragment_login" />
 
-    <!-- Fragmento de simposios proximos -->
     <fragment
         android:id="@+id/navigation_symposiums"
         android:name="com.ebcf.jnab.ui.view.SymposiumsListFragment"
         android:label="@string/title_symposiums"
-        tools:layout="@layout/fragment_symposiums_list" />
+        tools:layout="@layout/fragment_symposiums_list" >
+        <action
+            android:id="@+id/action_navigation_symposiums_to_talksListFragment"
+            app:destination="@id/talksListFragment" />
+    </fragment>
 
-    <!-- Fragmento de todos (pasados y proximos) los simposios (agenda) -->
     <fragment
         android:id="@+id/navigation_agenda"
         android:name="com.ebcf.jnab.ui.view.AllSymposiumsListFragment"
         android:label="Agenda"
         tools:layout="@layout/fragment_all_symposiums_list" />
 
-    <!-- Fragmento de expositores -->
     <fragment
         android:id="@+id/navigation_speakers"
         android:name="com.ebcf.jnab.ui.view.SpeakersListFragment"
         android:label="@string/title_speakers"
         tools:layout="@layout/fragment_speakers_list" />
+
+    <fragment
+        android:id="@+id/talksListFragment"
+        android:name="com.ebcf.jnab.ui.view.TalksListFragment"
+        android:label="Charlas"
+        tools:layout="@layout/fragment_talks_list">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>
