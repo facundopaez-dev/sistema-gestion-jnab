@@ -1,21 +1,22 @@
-package com.ebcf.jnab.ui.speaker
+package com.ebcf.jnab.ui.user
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.ebcf.jnab.databinding.FragmentSpeakerBinding
+import com.ebcf.jnab.databinding.FragmentUserBinding
 
-class SpeakerFragment : Fragment() {
+class UserFragment : Fragment() {
 
-    private var _binding: FragmentSpeakerBinding? = null
+    private var _binding: FragmentUserBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSpeakerBinding.inflate(inflater, container, false)
+        _binding = FragmentUserBinding.inflate(inflater, container, false)
         return binding.root
     }
 
