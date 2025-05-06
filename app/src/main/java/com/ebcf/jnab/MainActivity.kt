@@ -36,12 +36,8 @@ class MainActivity : AppCompatActivity() {
         val role = UserRole.fromValue(roleFromFirebase)
 
         when (role) {
-            UserRole.ASSISTANT -> {
-                navController.navigate(R.id.action_loginFragment_to_assistantFragment)
-            }
-
-            UserRole.SPEAKER -> {
-                navController.navigate(R.id.action_loginFragment_to_speakerFragment)
+            UserRole.ASSISTANT, UserRole.SPEAKER -> {
+                navController.navigate(R.id.action_loginFragment_to_userFragment)
             }
 
             UserRole.ORGANIZER -> {

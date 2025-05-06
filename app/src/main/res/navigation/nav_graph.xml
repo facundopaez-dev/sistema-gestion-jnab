@@ -11,26 +11,22 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/action_loginFragment_to_assistantFragment"
-            app:destination="@id/assistantFragment" />
+            android:id="@+id/action_loginFragment_to_userFragment"
+            app:destination="@id/userFragment" />
         <action
             android:id="@+id/action_loginFragment_to_organizerFragment"
             app:destination="@id/organizerFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_speakerFragment"
-            app:destination="@id/speakerFragment" />
     </fragment>
     <fragment
-        android:id="@+id/assistantFragment"
-        android:name="com.ebcf.jnab.ui.assistant.AssistantFragment"
-        android:label="fragment_assistant"
-        tools:layout="@layout/fragment_assistant" />
+        android:id="@+id/userFragment"
+        android:name="com.ebcf.jnab.ui.user.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" />
     <fragment
         android:id="@+id/organizerFragment"
         android:name="com.ebcf.jnab.ui.organizer.OrganizerFragment"
         android:label="fragment_organizer"
         tools:layout="@layout/fragment_organizer" />
-              
 
     <fragment
         android:id="@+id/navigation_symposiums"
@@ -47,12 +43,6 @@
         android:name="com.ebcf.jnab.ui.view.AllSymposiumsListFragment"
         android:label="Agenda"
         tools:layout="@layout/fragment_all_symposiums_list" />
-
-    <fragment
-        android:id="@+id/speakerFragment"
-        android:name="com.ebcf.jnab.ui.speaker.SpeakerFragment"
-        android:label="fragment_speaker"
-        tools:layout="@layout/fragment_speaker" />
 
     <fragment
         android:id="@+id/talksListFragment"
