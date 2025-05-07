@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.ebcf.jnab.data.model.UserRole
 import com.ebcf.jnab.databinding.ActivityMainBinding
 import com.ebcf.jnab.ui.login.LoginViewModel
@@ -29,6 +31,7 @@ class MainActivity : AppCompatActivity() {
                 navigateBasedOnRole(result.role)
             }
         })
+
     }
 
     private fun navigateBasedOnRole(roleFromFirebase: String) {
@@ -49,5 +52,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+
+
 
 }

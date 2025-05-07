@@ -17,41 +17,17 @@
             android:id="@+id/action_loginFragment_to_organizerFragment"
             app:destination="@id/organizerFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/userFragment"
         android:name="com.ebcf.jnab.ui.user.UserFragment"
         android:label="fragment_user"
         tools:layout="@layout/fragment_user" />
+
     <fragment
         android:id="@+id/organizerFragment"
         android:name="com.ebcf.jnab.ui.organizer.OrganizerFragment"
         android:label="fragment_organizer"
         tools:layout="@layout/fragment_organizer" />
-
-    <fragment
-        android:id="@+id/navigation_symposiums"
-        android:name="com.ebcf.jnab.ui.view.SymposiumsListFragment"
-        android:label="@string/title_symposiums"
-        tools:layout="@layout/fragment_symposiums_list" >
-        <action
-            android:id="@+id/action_navigation_symposiums_to_talksListFragment"
-            app:destination="@id/talksListFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/navigation_agenda"
-        android:name="com.ebcf.jnab.ui.view.AllSymposiumsListFragment"
-        android:label="Agenda"
-        tools:layout="@layout/fragment_all_symposiums_list" />
-
-    <fragment
-        android:id="@+id/talksListFragment"
-        android:name="com.ebcf.jnab.ui.view.TalksListFragment"
-        android:label="Charlas"
-        tools:layout="@layout/fragment_talks_list">
-        <argument
-            android:name="id"
-            app:argType="integer" />
-    </fragment>
 
 </navigation>

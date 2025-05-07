@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_user_home_graph"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/navigation_symposiums">
+
+    <fragment
+        android:id="@+id/navigation_symposiums"
+        android:name="com.ebcf.jnab.ui.view.SymposiumsListFragment"
+        android:label="@string/title_symposiums"
+        tools:layout="@layout/fragment_symposiums_list" >
+        <action
+            android:id="@+id/action_navigation_symposiums_to_talksListFragment"
+            app:destination="@id/talksListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_agenda"
+        android:name="com.ebcf.jnab.ui.view.AllSymposiumsListFragment"
+        android:label="Agenda"
+        tools:layout="@layout/fragment_all_symposiums_list" />
+
+    <fragment
+        android:id="@+id/talksListFragment"
+        android:name="com.ebcf.jnab.ui.view.TalksListFragment"
+        android:label="Charlas"
+        tools:layout="@layout/fragment_talks_list">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_speakers"
+        android:name="com.ebcf.jnab.ui.view.SpeakersListFragment"
+        android:label="@string/title_speakers"
+        tools:layout="@layout/fragment_speakers_list" />
+</navigation>
