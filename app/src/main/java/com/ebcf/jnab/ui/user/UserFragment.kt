@@ -27,9 +27,7 @@ class UserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val navController = childFragmentManager.findFragmentById(R.id.home_nav_host)?.findNavController() ?: return
-
         binding.navView.setupWithNavController(navController)
-
 
     }
 
