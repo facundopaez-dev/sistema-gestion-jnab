@@ -6,5 +6,8 @@ data class SymposiumModel(
     val id : Int,
     val title: String,
     val description: String,
-    val dateTime: LocalDateTime
+    val startDateTime: LocalDateTime,
+    val endDateTime: LocalDateTime,
+    val talks: List<TalkModel>
+
 )

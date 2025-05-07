@@ -21,7 +21,7 @@ class SymposiumsListAdapter(
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(symposium: SymposiumModel, formatDateUseCase: FormatDateUseCase) {
             binding.symposiumTitle.text = symposium.title
-            binding.dateTime.text = formatDateUseCase.execute(symposium.dateTime)
+            binding.dateTime.text = formatDateUseCase.execute(symposium.startDateTime)
         }
     }
 
