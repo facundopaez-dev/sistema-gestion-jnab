@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ebcf.jnab.R
 import com.ebcf.jnab.databinding.FragmentSymposiumsListBinding
 import com.ebcf.jnab.domain.usecase.FormatDateUseCase
 import com.ebcf.jnab.ui.view.adapter.SymposiumsListAdapter
@@ -46,6 +47,7 @@ class SymposiumsListFragment : Fragment() {
                 findNavController().navigate(action)
             }
         }
+
         return root
     }
 
