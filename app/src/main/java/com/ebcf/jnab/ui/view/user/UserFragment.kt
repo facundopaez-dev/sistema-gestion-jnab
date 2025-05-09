@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -28,6 +31,12 @@ class UserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val navController = childFragmentManager.findFragmentById(R.id.home_nav_host)?.findNavController() ?: return
         binding.navView.setupWithNavController(navController)
+
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.navigation_symposiums, R.id.navigation_agenda, R.id.navigation_speakers)
+        )
+
+
 
     }
 

@@ -3,11 +3,14 @@ package com.ebcf.jnab.ui.view.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ebcf.jnab.R
 import com.ebcf.jnab.data.model.TalkModel
 import com.ebcf.jnab.databinding.ItemTalkBinding
 import com.ebcf.jnab.ui.viewmodel.TalksListViewModel
 
-class TalksListAdapter(private val talks: List<TalkModel>) :
+class TalksListAdapter(private val talks: List<TalkModel>,
+                       private val favoriteIds: Set<Int>,
+                       private val onFavoriteClick: (Int) -> Unit) :
     RecyclerView.Adapter<TalksListAdapter.TalksListViewHolder>() {
 
     inner class TalksListViewHolder(private val binding: ItemTalkBinding) :
@@ -15,8 +18,23 @@ class TalksListAdapter(private val talks: List<TalkModel>) :
 
         fun bind(talk: TalkModel) {
             binding.textView.text = talk.title
+            val isFavorite = favoriteIds.contains(talk.id)
+            val iconRes = if (isFavorite) {
+                R.drawable.baseline_favorite_24
+            } else {
+                R.drawable.baseline_favorite_border_24
+            }
+
+
+            binding.btnFavorite.setImageResource(iconRes)
+
+            binding.btnFavorite.setOnClickListener {
+                onFavoriteClick(talk.id)
+            }
 
         }
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TalksListViewHolder {
@@ -26,7 +44,6 @@ class TalksListAdapter(private val talks: List<TalkModel>) :
 
     override fun onBindViewHolder(holder: TalksListViewHolder, position: Int) {
         holder.bind(talks[position])
-
     }
 
     override fun getItemCount(): Int = talks.size
