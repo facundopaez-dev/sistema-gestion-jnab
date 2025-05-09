@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.user
+package com.ebcf.jnab.ui.view.user
 
 import android.os.Bundle
 import android.view.LayoutInflater
