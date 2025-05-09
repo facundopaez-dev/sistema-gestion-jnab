@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/userFragment"
-        android:name="com.ebcf.jnab.ui.user.UserFragment"
+        android:name="com.ebcf.jnab.ui.view.user.UserFragment"
         android:label="fragment_user"
         tools:layout="@layout/fragment_user" />
 
