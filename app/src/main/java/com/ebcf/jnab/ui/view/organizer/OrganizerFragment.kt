@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.organizer
+package com.ebcf.jnab.ui.view.organizer
 
 import android.os.Bundle
 import android.view.LayoutInflater

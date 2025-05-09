@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.ebcf.jnab.databinding.FragmentUserBinding
 import com.ebcf.jnab.R
@@ -35,6 +35,7 @@ class UserFragment : Fragment() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(R.id.navigation_symposiums, R.id.navigation_agenda, R.id.navigation_speakers)
         )
+
 
 
     }
