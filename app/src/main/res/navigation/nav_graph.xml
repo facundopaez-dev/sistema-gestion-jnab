@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/organizerFragment"
-        android:name="com.ebcf.jnab.ui.organizer.OrganizerFragment"
+        android:name="com.ebcf.jnab.ui.view.organizer.OrganizerFragment"
         android:label="fragment_organizer"
         tools:layout="@layout/fragment_organizer" />
 
