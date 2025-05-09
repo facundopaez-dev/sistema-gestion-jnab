@@ -5,14 +5,15 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="18dp">
-
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    android:paddingStart="10dp">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="70dp"
         android:maxLines="2"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,9 +24,10 @@
 
     <ImageButton
         android:id="@+id/btn_favorite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="12dp"
+        android:layout_marginStart="5dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="favorito"
         android:ellipsize="end"
