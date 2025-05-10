@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ebcf.jnab.data.model.SpeakerModel
 import com.ebcf.jnab.databinding.ItemSpeakerBinding
 
-class SpeakersListAdapter(private val speakers: List<SpeakerModel>) :
+class SpeakersListAdapter(private val speakers: List<SpeakerModel> , private val onItemClick: (SpeakerModel) -> Unit
+) :
     RecyclerView.Adapter<SpeakersListAdapter.SpeakerViewHolder>() {
 
     inner class SpeakerViewHolder(private val binding: ItemSpeakerBinding) :
@@ -15,7 +16,6 @@ class SpeakersListAdapter(private val speakers: List<SpeakerModel>) :
         fun bind(speaker: SpeakerModel) {
             binding.speakerName.text = "${speaker.firstName} ${speaker.lastName}"
             binding.speakerInstitution.text = speaker.institution
-            binding.speakerEmail.text = speaker.email
         }
     }
 
@@ -25,8 +25,11 @@ class SpeakersListAdapter(private val speakers: List<SpeakerModel>) :
     }
 
     override fun onBindViewHolder(holder: SpeakerViewHolder, position: Int) {
-        holder.bind(speakers[position])
+        val speaker = speakers[position]
+        holder.bind(speaker)
+        holder.itemView.setOnClickListener {
+            onItemClick(speaker)
+        }
     }
-
     override fun getItemCount(): Int = speakers.size
 }

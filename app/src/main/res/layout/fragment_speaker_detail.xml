@@ -1,0 +1,74 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Toolbar para botón de volver -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="Detalle del expositor"
+        app:titleTextColor="@android:color/white" />
+
+    <!-- Contenido del detalle -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Nombre completo -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre completo:"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="..." />
+
+            <!-- Institución -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Institución:"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:paddingTop="16dp" />
+
+            <TextView
+                android:id="@+id/textInstitution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="..." />
+
+            <!-- Correo -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Correo:"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:paddingTop="16dp" />
+
+            <TextView
+                android:id="@+id/textEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:autoLink="email" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebcf.jnab.databinding.FragmentSpeakersListBinding
 import com.ebcf.jnab.ui.view.adapter.SpeakersListAdapter
@@ -31,8 +32,14 @@ class SpeakersListFragment : Fragment() {
 
         // Observar ViewModel para la lista de expositores
         speakersListViewModel.speakers.observe(viewLifecycleOwner) { speakers ->
-            recyclerView.adapter = SpeakersListAdapter(speakers)
+            recyclerView.adapter = SpeakersListAdapter(speakers) { selectedSpeaker ->
+                // Aquí podés navegar al fragmento de detalle, por ejemplo:
+                val action = SpeakersListFragmentDirections
+                    .actionSpeakersListFragmentToSpeakerDetailFragment(selectedSpeaker.id)
+                findNavController().navigate(action)
+            }
         }
+
 
         return root
     }
