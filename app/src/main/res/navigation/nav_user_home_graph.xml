@@ -34,6 +34,22 @@
     <fragment
         android:id="@+id/navigation_speakers"
         android:name="com.ebcf.jnab.ui.view.SpeakersListFragment"
-        android:label="@string/title_speakers"
-        tools:layout="@layout/fragment_speakers_list" />
+        android:label="Expositores" >
+        <action
+            android:id="@+id/action_speakersListFragment_to_speakerDetailFragment"
+            app:destination="@id/speakerDetailFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/speakerDetailFragment"
+        android:name="com.ebcf.jnab.ui.view.SpeakerDetailFragment"
+        android:label="Detalle del expositor">
+        <argument
+            android:name="speakerId"
+            app:argType="integer" />
+    </fragment>
 </navigation>
