@@ -42,6 +42,12 @@ class SpeakerDetailFragment : Fragment() {
         myToolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+        binding.btnTalkHistory.setOnClickListener {
+            val bundle = Bundle().apply {
+                putInt("speakerId", speakerId)
+            }
+            findNavController().navigate(R.id.action_speakerDetailFragment_to_talkHistoryFragment, bundle)
+        }
     }
 
     override fun onDestroyView() {

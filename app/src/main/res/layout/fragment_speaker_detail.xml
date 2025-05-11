@@ -9,10 +9,10 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="?attr/colorBackgroundFloating"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:title="Detalle del expositor"
-        app:titleTextColor="@android:color/white" />
+        app:titleTextColor="?android:textColorPrimary" />
 
     <!-- Contenido del detalle -->
     <ScrollView
@@ -69,6 +69,12 @@
                 android:layout_height="wrap_content"
                 android:text="..."
                 android:autoLink="email" />
+            <Button
+                android:id="@+id/btnTalkHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ver historial de charlas"
+                android:layout_marginTop="24dp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
