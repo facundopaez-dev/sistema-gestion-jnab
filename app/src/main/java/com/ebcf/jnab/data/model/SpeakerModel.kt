@@ -5,5 +5,6 @@ data class SpeakerModel(
     val firstName: String,
     val lastName: String,
     val institution: String,
-    val email: String
+    val email: String,
+    val talks: List<TalkModel>
 )
