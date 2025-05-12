@@ -18,7 +18,7 @@ class OrganizerSymposiumAdapter(
         RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(symposium: SymposiumModel, formatDateUseCase: FormatDateUseCase) {
-            binding.tittle.text = symposium.title
+            binding.title.text = symposium.title
             binding.startTime.text = formatDateUseCase.execute(symposium.startDateTime)
         }
     }
