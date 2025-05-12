@@ -5,9 +5,21 @@
     android:id="@+id/nav_organizer_graph"
     app:startDestination="@id/orgSymposiumsListFragment">
 
+    <!-- IMPORTANTE A TENER EN CUENTA -->
+    <!-- Los IDs de los fragmentos de un archivo de navegacion (como nav_graph) -->
+    <!-- deben coincidir con los IDs de los items definidos para un BottomNavigationView -->
+    <!-- (como el de fragment_organizer.xml) para que la navegacion con -->
+    <!-- setupWithNavController() funcione correctamente -->
+    <fragment
+        android:id="@+id/submissionsListFragment"
+        android:name="com.ebcf.jnab.ui.view.organizer.SubmissionsListFragment"
+        android:label="fragment_submissions_list"
+        tools:layout="@layout/fragment_submissions_list" />
+
     <fragment
         android:id="@+id/orgSymposiumsListFragment"
         android:name="com.ebcf.jnab.ui.view.organizer.OrgSymposiumsListFragment"
         android:label="fragment_org_symposiums_list"
         tools:layout="@layout/fragment_org_symposiums_list" />
+
 </navigation>
