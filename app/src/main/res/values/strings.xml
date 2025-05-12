@@ -8,4 +8,5 @@
     <string name="hint_email">Correo electrónico</string>
     <string name="hint_password">Contraseña</string>
     <string name="content_login_button">Iniciar sesión</string>
+    <string name="title_submissions">Trabajos</string>
 </resources>
