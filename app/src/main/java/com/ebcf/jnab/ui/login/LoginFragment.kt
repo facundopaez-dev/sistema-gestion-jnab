@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.ebcf.jnab.databinding.FragmentLoginBinding
+import com.google.android.material.snackbar.Snackbar
 
 class LoginFragment : Fragment() {
 
@@ -19,7 +18,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
 
@@ -31,25 +30,28 @@ class LoginFragment : Fragment() {
             val password = binding.passwordField.text.toString().trim()
 
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(
-                    requireContext(),
+                Snackbar.make(
+                    requireView(),
                     "Todos los campos deben estar completos",
-                    Toast.LENGTH_LONG
+                    Snackbar.LENGTH_LONG
                 ).show()
                 return@setOnClickListener
             }
 
             if (!email.matches(emailRegex)) {
-                Toast.makeText(requireContext(), "Correo electrónico no válido", Toast.LENGTH_LONG)
-                    .show()
+                Snackbar.make(
+                    requireView(),
+                    "Correo electrónico no válido",
+                    Snackbar.LENGTH_LONG
+                ).show()
                 return@setOnClickListener
             }
 
             if (!password.matches(passwordRegex)) {
-                Toast.makeText(
-                    requireContext(),
+                Snackbar.make(
+                    requireView(),
                     "La contraseña debe tener al menos 6 caracteres",
-                    Toast.LENGTH_LONG
+                    Snackbar.LENGTH_LONG
                 ).show()
                 return@setOnClickListener
             }
@@ -57,18 +59,15 @@ class LoginFragment : Fragment() {
             viewModel.login(email, password)
         }
 
-        // Observa los cambios en el LiveData
-        viewModel.loginResult.observe(viewLifecycleOwner, Observer { result ->
-            if (result.success) {
-                Toast.makeText(context, "Inicio de sesión satisfactorio", Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(
-                    context,
+        viewModel.loginResult.observe(viewLifecycleOwner) { result ->
+            if (!result.success) {
+                Snackbar.make(
+                    requireView(),
                     "Correo electrónico o contraseña incorrectos",
-                    Toast.LENGTH_LONG
+                    Snackbar.LENGTH_LONG
                 ).show()
             }
-        })
+        }
 
         return binding.root
     }
