@@ -9,4 +9,9 @@
     <string name="hint_password">Contraseña</string>
     <string name="content_login_button">Iniciar sesión</string>
     <string name="title_submissions">Trabajos</string>
+    <string name="filter_all">Todos</string>
+    <string name="filter_pending">Pendiente</string>
+    <string name="filter_approved">Aprobado</string>
+    <string name="filter_rejected">Rechazado</string>
+    <string name="button_apply_filter">Aplicar filtro</string>
 </resources>
