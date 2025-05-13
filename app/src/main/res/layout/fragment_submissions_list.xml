@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ui.view.organizer.SubmissionsListFragment">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_submissions"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/menu_submissions"
+        app:title="@string/title_submissions"
+        app:titleTextColor="@android:color/white" />
+
     <!-- RecyclerView para mostrar los elementos de la lista -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_submissions"
@@ -15,7 +27,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_submissions"
         tools:ignore="SpeakableTextPresentCheck"
         tools:listitem="@layout/item_submission" />
 
