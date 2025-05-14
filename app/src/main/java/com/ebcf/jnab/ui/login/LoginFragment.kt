@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ebcf.jnab.databinding.FragmentLoginBinding
 import com.google.android.material.snackbar.Snackbar
+import android.util.Patterns
 
 class LoginFragment : Fragment() {
 
@@ -24,7 +25,6 @@ class LoginFragment : Fragment() {
 
         // Configura el click del boton de inicio de sesion
         binding.loginButton.setOnClickListener {
-            val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$".toRegex()
             val passwordRegex = "^.{6,}$".toRegex()
             val email = binding.emailAddressField.text.toString().trim()
             val password = binding.passwordField.text.toString().trim()
@@ -38,7 +38,7 @@ class LoginFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            if (!email.matches(emailRegex)) {
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 Snackbar.make(
                     requireView(),
                     "Correo electrónico no válido",
