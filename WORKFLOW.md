@@ -34,37 +34,37 @@ git pull origin main
 El nombre de la rama debe seguir la convención: `feature/nombre-funcionalidad`. Esto facilita la organización y el seguimiento del desarrollo. Por ejemplo:
 
 ```
-git checkout -b feature/agregar-pantalla-agenda
+git checkout -b feature/pantalla-agenda
 ```
 
 ---
 
 ### 4. Realizar commits localmente en la rama correspondiente
-- Los mensajes de los commits deben seguir la convención [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/), **usando infinitivo**. Esto es porque el mensaje describe **lo que hace el commit al aplicarse**, no lo que hizo el programador.
+- Se recomienda redactar el mensaje del commit en **modo imperativo**, ya que describe **lo que hace el commit al aplicarse**, no lo que hizo el programador. Esta práctica está establecida en la sección _5.2 Distributed Git - Contributing to a Project_ del libro **Pro Git**.
 
-  ✔️ Correcto:
+  ✔️ Correcto (mensaje en modo imperativo):
   ```
-  git commit -m "feat: agregar pantalla de agenda"
+  git commit -m "feat: implementa pantalla de agenda"
   ```
 
   ❌ Incorrecto:
   ```
-  git commit -m "feat: agregué pantalla de agenda"
+  git commit -m "feat: implementé pantalla de agenda"
   ```
 
-- Tipos de commit más comunes:
-    - `feat`: agregar una nueva funcionalidad
-    - `fix`: corregir un error
-    - `docs`: actualizar documentación
-    - `style`: aplicar cambios de formato
-    - `refactor`: reestructurar código sin cambiar funcionalidad
-    - `test`: agregar o modificar pruebas
-    - `chore`: tareas de mantenimiento
+- También se recomienda seguir la especificación [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/), la cual define los siguientes tipos de commit más comunes:
+  - `feat`: agregar una nueva funcionalidad
+  - `fix`: corregir un error
+  - `docs`: actualizar documentación
+  - `style`: aplicar cambios de formato
+  - `refactor`: reestructurar código sin cambiar funcionalidad
+  - `test`: agregar o modificar pruebas
+  - `chore`: tareas de mantenimiento
 
-- Opcional, pero recomendado: al final del mensaje de un commit, se puede incluir entre paréntesis # seguido del número del issue relacionado, ya que contribuye a la trazabilidad. Por ejemplo:
+- Opcional, pero recomendable: al final del mensaje de un commit, se puede incluir entre paréntesis # seguido del número del issue relacionado, ya que contribuye a la trazabilidad. Por ejemplo:
 
   ```
-  git commit -m "fix: corregir validación de correo (#42)"
+  git commit -m "fix: corrige validación de correo (#42)"
   ```
 
 > ⚠️ **Importante:** No se debe incluir `closes #<número-issue>` en el mensaje de un commit. Ese enlace se declara en la **descripción del pull request**, como se indica en el paso 6.
@@ -81,7 +81,7 @@ git push origin <nombre-rama>
 ---
 
 ### 6. Crear un Pull Request (PR) en GitHub
-- El título del pull request debe reflejar el cambio realizado, por ejemplo, la funcionalidad implementada. Si está relacionado con un issue, se recomienda incluir al final del título el número del issue utilizando el formato `(#<número-issue>)`, ya que esto mejora la trazabilidad. Por ejemplo: `feat: implementar modelo de datos del simposio (#4)`.
+- El título del pull request debe reflejar el cambio realizado, por ejemplo, la funcionalidad implementada. Si está relacionado con un issue, se recomienda incluir al final del título el número del issue utilizando el formato `(#<número-issue>)`, ya que esto mejora la trazabilidad. Por ejemplo: `feat: implementa modelo de datos del simposio (#4)`.
 - En la descripción del PR, debe incluirse `closes #<número-issue>` si el cambio está relacionado con un issue. Esto permitirá que GitHub cierre automáticamente el issue al hacer el merge.
 - El propietario del PR **debe asignarse** como responsable del pull request.
 - El propietario del PR puede aprobar su propio pull request. Esta configuración busca agilizar el flujo de trabajo del equipo sin imponer rigidez innecesaria.
@@ -112,9 +112,8 @@ git push origin --delete <nombre-rama>
 
 ### 8. Usar nombres descriptivos y consistentes
 Mantener nombres descriptivos y consistentes en el issue, la rama y el pull request mejora la organización y la trazabilidad del trabajo. Por ejemplo, si la funcionalidad es una pantalla de agenda y el issue relacionado es el número 1, se recomienda utilizar:
-
-- **Título del issue**: `Agregar pantalla de agenda`
-- **Nombre de la rama**: `feature/agregar-pantalla-agenda`
-- **Mensaje del commit**: `feat: agregar pantalla de agenda (#1)`
-- **Título del pull request**: `feat: agregar pantalla de agenda (#1)`
+- **Título del issue**: `Pantalla de agenda`
+- **Nombre de la rama**: `feature/pantalla-agenda`
+- **Mensaje del commit**: `feat: implementa pantalla de agenda (#1)`
+- **Título del pull request**: `feat: implementa pantalla de agenda (#1)`
 - **Descripción del pull request**: `closes #1`
