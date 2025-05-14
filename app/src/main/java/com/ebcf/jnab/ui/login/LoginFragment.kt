@@ -25,7 +25,7 @@ class LoginFragment : Fragment() {
 
         // Configura el click del boton de inicio de sesion
         binding.loginButton.setOnClickListener {
-            val passwordRegex = "^.{6,}$".toRegex()
+            val minPasswordLength = 6
             val email = binding.emailAddressField.text.toString().trim()
             val password = binding.passwordField.text.toString().trim()
 
@@ -47,10 +47,10 @@ class LoginFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            if (!password.matches(passwordRegex)) {
+            if (password.length < minPasswordLength) {
                 Snackbar.make(
                     requireView(),
-                    "La contraseña debe tener al menos 6 caracteres",
+                    "La contraseña debe tener al menos $minPasswordLength caracteres",
                     Snackbar.LENGTH_LONG
                 ).show()
                 return@setOnClickListener
