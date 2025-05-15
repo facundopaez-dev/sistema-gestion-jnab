@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ebcf.jnab.data.model.TalkModel
 import com.ebcf.jnab.databinding.ItemTalkSpeakerBinding
 import com.ebcf.jnab.domain.usecase.FormatDateUseCase
+import java.time.format.DateTimeFormatter
 
 class TalkHistoryAdapter(private val talks: List<TalkModel>, private val formatDateUseCase: FormatDateUseCase) :
     RecyclerView.Adapter<TalkHistoryAdapter.TalkHistoryViewHolder>() {
@@ -18,7 +19,9 @@ class TalkHistoryAdapter(private val talks: List<TalkModel>, private val formatD
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(talk: TalkModel,formatDateUseCase: FormatDateUseCase) {
             binding.textView.text = talk.title
-            binding.dateTime.text = formatDateUseCase.execute(talk.startDateTime)
+            val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy 'a las' HH:mm 'h'")
+            val formattedDateTime = talk.startDateTime.format(formatter)
+            binding.dateTime.text = "Presentada el $formattedDateTime"
         }
     }
 
