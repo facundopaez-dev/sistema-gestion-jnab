@@ -23,4 +23,10 @@
 
     <string name="all_symposiums">Todos los simposios</string>
     <string name="all_speakers">Todos los ponentes</string>
+    <string name="signup_hint_name">Nombre</string>
+    <string name="signup_hint_last_name">Apellido</string>
+    <string name="signup_hint_confirm_password">Confirmar contraseña</string>
+    <string name="signup_button_register">Registrarse</string>
+    <string name="signup_text_have_account">¿Tiene una cuenta? Inicie sesión</string>
+    <string name="text_no_account_register">¿No tiene una cuenta? Regístrese</string>
 </resources>
