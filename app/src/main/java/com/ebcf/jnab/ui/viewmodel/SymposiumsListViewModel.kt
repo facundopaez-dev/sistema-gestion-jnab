@@ -19,4 +19,11 @@ class SymposiumsListViewModel : ViewModel() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     val symposiums: LiveData<List<SymposiumModel>> = _symposiums
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getSymposiumById(id: Int): SymposiumModel? {
+        return _symposiums.value?.firstOrNull { it.id == id }
+    }
+
 }

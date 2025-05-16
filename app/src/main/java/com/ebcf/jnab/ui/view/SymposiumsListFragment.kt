@@ -43,7 +43,7 @@ class SymposiumsListFragment : Fragment() {
         // Observar ViewModel para la lista de simposios
         symposiumsListViewModel.symposiums.observe(viewLifecycleOwner) { symposiums ->
             recyclerView.adapter = SymposiumsListAdapter(symposiums, formatDateUseCase) { symposium ->
-                val action = SymposiumsListFragmentDirections.actionNavigationSymposiumsToTalksListFragment(symposium.id)
+                val action = SymposiumsListFragmentDirections.actionNavigationSymposiumsToSymposiumDetailFragment(symposium.id)
                 findNavController().navigate(action)
             }
         }

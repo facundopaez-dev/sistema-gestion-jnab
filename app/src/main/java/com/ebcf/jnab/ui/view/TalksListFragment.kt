@@ -16,21 +16,28 @@ import com.ebcf.jnab.R
 import com.ebcf.jnab.databinding.FragmentTalksListBinding
 import com.ebcf.jnab.ui.view.adapter.TalksListAdapter
 import com.ebcf.jnab.ui.viewmodel.TalksListViewModel
+import android.util.Log;
+
 
 class TalksListFragment : Fragment() {
 
     private var _binding: FragmentTalksListBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var adapter: TalksListAdapter
+    private lateinit var talksListViewModel: TalksListViewModel
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentTalksListBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val talksListViewModel = ViewModelProvider(this).get(TalksListViewModel::class)
+
+        //scope de activity para que el
+        talksListViewModel =
+            ViewModelProvider(requireActivity()).get(TalksListViewModel::class.java)
 
         val recyclerView = binding.recyclerViewTalks
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -43,7 +50,7 @@ class TalksListFragment : Fragment() {
         }
 
 
-        talksListViewModel.talks.observe(viewLifecycleOwner) { talks ->
+        talksListViewModel.filteredTalks.observe(viewLifecycleOwner) { talks ->
             val favoriteIds = talksListViewModel.favoriteIds.value ?: setOf()
             recyclerView.adapter = TalksListAdapter(talks, favoriteIds) { talkId ->
                 talksListViewModel.toggleFavorite(talkId)
@@ -51,13 +58,39 @@ class TalksListFragment : Fragment() {
         }
 
         val myToolbar = binding.toolbar
-        myToolbar.setNavigationIcon(R.drawable.baseline_keyboard_backspace_24)
+//        myToolbar.setNavigationIcon(R.drawable.baseline_keyboard_backspace_24)
+//
+//        myToolbar.setNavigationOnClickListener { view ->
+//            findNavController().navigateUp()
+//        }
 
-        myToolbar.setNavigationOnClickListener { view ->
-            findNavController().navigateUp()
+        val filterBottomSheet = TalksFilterBottomSheet()
+
+        myToolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.action_filter -> {
+                    filterBottomSheet.show(parentFragmentManager, TalksFilterBottomSheet.TAG)
+                    true
+                }
+                else -> false
+            }
         }
-
-
         return root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        if (isRemoving) {
+            talksListViewModel.clearFilters() // Limpia los filtros al salir del fragmento
+        }
+        _binding = null
+    }
+
+
 }

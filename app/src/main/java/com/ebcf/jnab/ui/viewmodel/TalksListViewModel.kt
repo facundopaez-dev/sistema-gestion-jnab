@@ -1,27 +1,41 @@
 package com.ebcf.jnab.ui.viewmodel
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ebcf.jnab.data.repository.TalkRepository
 import com.ebcf.jnab.data.model.TalkModel
+import java.time.LocalDate
+import java.time.LocalDateTime
 
+@RequiresApi(Build.VERSION_CODES.O)
 class TalksListViewModel : ViewModel() {
 
+
     private val repository = TalkRepository()
+    private var allTalks: List<TalkModel> = listOf()
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private val _talks = MutableLiveData<List<TalkModel>>().apply {
-        value = repository.getAll(2) // TODO: Hardcoded
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    val talks: LiveData<List<TalkModel>> = _talks
+    private val _talks = MutableLiveData<List<TalkModel>>()
+    val talks: LiveData<List<TalkModel>> get() = _talks
 
     private val _favoriteIds = MutableLiveData<Set<Int>>(setOf())
     val favoriteIds: LiveData<Set<Int>> get() = _favoriteIds
+
+    private val _filteredTalks = MutableLiveData<List<TalkModel>>()
+    val filteredTalks: LiveData<List<TalkModel>> = _filteredTalks
+
+    init {
+        loadTalks()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun loadTalks() {
+        allTalks = repository.getAll(2) // TODO: Hardcoded
+        _talks.value = allTalks
+    }
 
     fun toggleFavorite(talkId: Int) {
         val current = _favoriteIds.value ?: setOf()
@@ -31,4 +45,26 @@ class TalksListViewModel : ViewModel() {
             current + talkId
         }
     }
+
+
+    fun applyFilters(symposiumId: Int?, speakerId: Int?, date: LocalDate?) {
+        Log.d("TalksListViewModel", "Applying filters: SymposiumId=$symposiumId, SpeakerId=$speakerId, Date=$date")
+        val allTalks = _talks.value ?: emptyList()
+
+        val filtered = allTalks.filter { talk ->
+            (symposiumId == null || talk.symposiumId == symposiumId) &&
+                    (speakerId == null || talk.speakerId == speakerId) &&
+                    (date == null || talk.date.isEqual(date))
+        }
+
+        _filteredTalks.value = filtered
+        Log.d("adsf","$filtered")
+
+    }
+
+    fun clearFilters() {
+        _filteredTalks.value = _talks.value
+    }
+
+
 }
