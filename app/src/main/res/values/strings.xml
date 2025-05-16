@@ -14,4 +14,10 @@
     <string name="filter_approved">Aprobado</string>
     <string name="filter_rejected">Rechazado</string>
     <string name="button_apply_filter">Aplicar filtro</string>
+    <string name="signup_hint_name">Nombre</string>
+    <string name="signup_hint_last_name">Apellido</string>
+    <string name="signup_hint_confirm_password">Confirmar contraseña</string>
+    <string name="signup_button_register">Registrarse</string>
+    <string name="signup_text_have_account">¿Tiene una cuenta? Inicie sesión</string>
+    <string name="text_no_account_register">¿No tiene una cuenta? Regístrese</string>
 </resources>
