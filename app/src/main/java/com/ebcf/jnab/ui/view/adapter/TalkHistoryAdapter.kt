@@ -18,7 +18,7 @@ class TalkHistoryAdapter(private val talks: List<TalkModel>, private val formatD
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(talk: TalkModel,formatDateUseCase: FormatDateUseCase) {
             binding.textView.text = talk.title
-            binding.dateTime.text = formatDateUseCase.execute(talk.startDateTime)
+            binding.dateTime.text = formatDateUseCase.formatDateTime(talk.date,talk.startTime)
         }
     }
 

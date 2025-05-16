@@ -2,23 +2,26 @@ package com.ebcf.jnab.ui.view
 
 import android.os.Build
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebcf.jnab.R
+import com.ebcf.jnab.databinding.FragmentSymposiumDetailBinding
 import com.ebcf.jnab.databinding.FragmentSymposiumsListBinding
 import com.ebcf.jnab.domain.usecase.FormatDateUseCase
 import com.ebcf.jnab.ui.view.adapter.SymposiumsListAdapter
+import com.ebcf.jnab.ui.view.adapter.TalksListAdapter
 import com.ebcf.jnab.ui.viewmodel.SymposiumsListViewModel
+import com.ebcf.jnab.ui.viewmodel.TalksListViewModel
 
-class SymposiumsListFragment : Fragment() {
+class SymposiumDetailFragment : Fragment() {
 
-    private var _binding: FragmentSymposiumsListBinding? = null
+    private var _binding: FragmentSymposiumDetailBinding? = null
     private val binding get() = _binding!!
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -27,24 +30,40 @@ class SymposiumsListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSymposiumsListBinding.inflate(inflater, container, false)
+        _binding = FragmentSymposiumDetailBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
+        val args = SymposiumDetailFragmentArgs.fromBundle(requireArguments())
+        val symposiumId = args.symposiumId
+
+
+
         // Crear el ViewModel sin Factory
+        val talksListViewModel = ViewModelProvider(this).get(TalksListViewModel::class.java)
+
         val symposiumsListViewModel = ViewModelProvider(this).get(SymposiumsListViewModel::class.java)
 
         // Crear una instancia del caso de uso
         val formatDateUseCase = FormatDateUseCase()
 
+        val symposium = symposiumsListViewModel.getSymposiumById(symposiumId)
+
+        symposium?.let {
+            binding.textViewTitle.text = it.title
+            binding.textViewDescription.text = it.description
+            binding.textViewDates.text = formatDateUseCase.formatRange(it.startDateTime, it.endDateTime)
+        }
+
         // Configurar RecyclerView
-        val recyclerView = binding.recyclerViewSymposiums
+        val recyclerView = binding.recyclerViewTalks
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         // Observar ViewModel para la lista de simposios
-        symposiumsListViewModel.symposiums.observe(viewLifecycleOwner) { symposiums ->
-            recyclerView.adapter = SymposiumsListAdapter(symposiums, formatDateUseCase) { symposium ->
-                val action = SymposiumsListFragmentDirections.actionNavigationSymposiumsToSymposiumDetailFragment(symposium.id)
-                findNavController().navigate(action)
+        talksListViewModel.talks.observe(viewLifecycleOwner) { talks ->
+            val favoriteIds = talksListViewModel.favoriteIds.value ?: setOf()
+            recyclerView.adapter = TalksListAdapter(talks, favoriteIds) { talkId ->
+                talksListViewModel.toggleFavorite(talkId)
             }
         }
 

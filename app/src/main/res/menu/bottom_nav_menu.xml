@@ -6,6 +6,10 @@
         android:title="@string/title_symposiums"
         android:icon="@drawable/baseline_library_books_24"/>
 
+    <item
+        android:id="@+id/navigation_talks"
+        android:title="@string/title_talks"
+        android:icon="@drawable/assignment_24dp_000000_fill0_wght400_grad0_opsz24"/>
 
     <item
         android:id="@+id/navigation_agenda"
@@ -16,5 +20,7 @@
         android:id="@+id/navigation_speakers"
         android:title="@string/title_speakers"
         android:icon="@drawable/baseline_emoji_people_24"/>
+
+
 
 </menu>

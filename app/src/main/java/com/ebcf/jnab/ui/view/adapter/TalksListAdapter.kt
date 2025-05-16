@@ -8,33 +8,32 @@ import com.ebcf.jnab.data.model.TalkModel
 import com.ebcf.jnab.databinding.ItemTalkBinding
 import com.ebcf.jnab.ui.viewmodel.TalksListViewModel
 
-class TalksListAdapter(private val talks: List<TalkModel>,
-                       private val favoriteIds: Set<Int>,
-                       private val onFavoriteClick: (Int) -> Unit) :
-    RecyclerView.Adapter<TalksListAdapter.TalksListViewHolder>() {
+
+class TalksListAdapter(
+    private var talks: List<TalkModel>,
+    private var favoriteIds: Set<Int>,
+    private val onFavoriteClick: (Int) -> Unit
+) : RecyclerView.Adapter<TalksListAdapter.TalksListViewHolder>() {
 
     inner class TalksListViewHolder(private val binding: ItemTalkBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(talk: TalkModel) {
             binding.textView.text = talk.title
+
             val isFavorite = favoriteIds.contains(talk.id)
             val iconRes = if (isFavorite) {
-                R.drawable.baseline_favorite_24
+                R.drawable.star_24dp
             } else {
-                R.drawable.baseline_favorite_border_24
+                R.drawable.star_24_border
             }
-
 
             binding.btnFavorite.setImageResource(iconRes)
 
             binding.btnFavorite.setOnClickListener {
                 onFavoriteClick(talk.id)
             }
-
         }
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TalksListViewHolder {
@@ -47,4 +46,10 @@ class TalksListAdapter(private val talks: List<TalkModel>,
     }
 
     override fun getItemCount(): Int = talks.size
+
+    fun updateData(newTalks: List<TalkModel>, newFavorites: Set<Int>) {
+        talks = newTalks
+        favoriteIds = newFavorites
+        notifyDataSetChanged() // Para mejor rendimiento, podés usar DiffUtil más adelante
+    }
 }

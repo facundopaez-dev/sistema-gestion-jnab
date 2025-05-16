@@ -11,8 +11,8 @@
         android:label="@string/title_symposiums"
         tools:layout="@layout/fragment_symposiums_list" >
         <action
-            android:id="@+id/action_navigation_symposiums_to_talksListFragment"
-            app:destination="@id/talksListFragment" />
+            android:id="@+id/action_navigation_symposiums_to_symposiumDetailFragment"
+            app:destination="@id/symposiumDetailFragment" />
     </fragment>
 
     <fragment
@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_all_symposiums_list" />
 
     <fragment
-        android:id="@+id/talksListFragment"
+        android:id="@+id/navigation_talks"
         android:name="com.ebcf.jnab.ui.view.TalksListFragment"
         android:label="Charlas"
         tools:layout="@layout/fragment_talks_list">
@@ -69,6 +69,16 @@
         tools:layout="@layout/fragment_talk_history">
         <argument
             android:name="speakerId"
+            app:argType="integer" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/symposiumDetailFragment"
+        android:name="com.ebcf.jnab.ui.view.SymposiumDetailFragment"
+        android:label="SymposiumDetailFragment" >
+        <argument
+            android:name="symposiumId"
             app:argType="integer" />
     </fragment>
 </navigation>
