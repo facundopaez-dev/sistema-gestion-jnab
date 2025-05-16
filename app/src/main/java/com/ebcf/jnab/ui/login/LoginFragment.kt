@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.ebcf.jnab.databinding.FragmentLoginBinding
 import com.google.android.material.snackbar.Snackbar
 import android.util.Patterns
+import androidx.navigation.fragment.findNavController
+import com.ebcf.jnab.R
 
 class LoginFragment : Fragment() {
 
@@ -59,14 +61,12 @@ class LoginFragment : Fragment() {
             viewModel.login(email, password)
         }
 
-        viewModel.loginResult.observe(viewLifecycleOwner) { result ->
-            if (!result.success) {
-                Snackbar.make(
-                    requireView(),
-                    "Correo electrónico o contraseña incorrectos",
-                    Snackbar.LENGTH_LONG
-                ).show()
-            }
+        viewModel.loginError.observe(viewLifecycleOwner) { errorMessage ->
+            Snackbar.make(requireView(), errorMessage, Snackbar.LENGTH_LONG).show()
+        }
+
+        binding.signupButton.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
         }
 
         return binding.root
