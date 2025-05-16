@@ -33,7 +33,7 @@ class UserFragment : Fragment() {
         binding.navView.setupWithNavController(navController)
 
         val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.navigation_symposiums, R.id.navigation_agenda, R.id.navigation_speakers)
+            setOf(R.id.navigation_symposiums, R.id.navigation_talks, R.id.navigation_agenda, R.id.navigation_speakers)
         )
 
 

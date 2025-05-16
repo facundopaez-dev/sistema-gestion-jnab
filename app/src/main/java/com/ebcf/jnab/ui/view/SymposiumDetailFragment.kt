@@ -67,6 +67,14 @@ class SymposiumDetailFragment : Fragment() {
             }
         }
 
+
+        val myToolbar = binding.toolbar
+        myToolbar.setNavigationIcon(R.drawable.baseline_keyboard_backspace_24)
+
+        myToolbar.setNavigationOnClickListener { view ->
+            findNavController().navigateUp()
+        }
+
         return root
     }
 
