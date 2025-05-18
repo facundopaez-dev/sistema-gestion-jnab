@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import android.util.Patterns
 import androidx.navigation.fragment.findNavController
 import com.ebcf.jnab.R
+import com.ebcf.jnab.util.MIN_PASSWORD_LENGTH
 
 class LoginFragment : Fragment() {
 
@@ -27,7 +28,6 @@ class LoginFragment : Fragment() {
 
         // Configura el click del boton de inicio de sesion
         binding.loginButton.setOnClickListener {
-            val minPasswordLength = 6
             val email = binding.emailAddressField.text.toString().trim()
             val password = binding.passwordField.text.toString().trim()
 
@@ -49,10 +49,10 @@ class LoginFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            if (password.length < minPasswordLength) {
+            if (password.length < MIN_PASSWORD_LENGTH) {
                 Snackbar.make(
                     requireView(),
-                    "La contraseña debe tener al menos $minPasswordLength caracteres",
+                    "La contraseña debe tener al menos $MIN_PASSWORD_LENGTH caracteres",
                     Snackbar.LENGTH_LONG
                 ).show()
                 return@setOnClickListener
