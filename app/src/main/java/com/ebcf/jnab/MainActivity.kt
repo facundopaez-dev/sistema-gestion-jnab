@@ -3,7 +3,6 @@ package com.ebcf.jnab
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +12,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.ebcf.jnab.data.model.UserRole
 import com.ebcf.jnab.databinding.ActivityMainBinding
 import com.ebcf.jnab.ui.login.LoginViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             else -> {
-                Toast.makeText(this, "Rol no reconocido", Toast.LENGTH_LONG).show()
+                Snackbar.make(binding.root, "Rol no reconocido", Snackbar.LENGTH_LONG).show()
             }
         }
     }
