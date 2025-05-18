@@ -10,13 +10,13 @@
         android:id="@+id/toolbar_submissions"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="?attr/colorBackgroundFloating"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/menu_submissions"
-        app:title="@string/title_submissions"
-        app:titleTextColor="@android:color/white" />
+        app:title="@string/title_submissions" />
 
     <!-- RecyclerView para mostrar los elementos de la lista -->
     <androidx.recyclerview.widget.RecyclerView
