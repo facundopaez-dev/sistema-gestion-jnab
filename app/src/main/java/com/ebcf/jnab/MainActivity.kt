@@ -27,15 +27,9 @@ class MainActivity : AppCompatActivity() {
         var viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
         // Observa el resultado del login desde el ViewModel
-        viewModel.loginResult.observe(this, Observer { result ->
-            if (result.success) {
-                // Si el inicio de sesion es exitoso, se navega segun el rol del usuario
-                navigateBasedOnRole(result.role)
-            }
+        viewModel.loginSuccess.observe(this, Observer { role ->
+            navigateBasedOnRole(role)
         })
-
-
-
 
     }
 
