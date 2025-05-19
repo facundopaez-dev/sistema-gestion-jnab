@@ -1,21 +1,15 @@
 package com.ebcf.jnab.ui.login
 
-import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.ebcf.jnab.utils.SingleLiveEvent
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class LoginViewModel(application: Application) : AndroidViewModel(application) {
+class LoginViewModel : ViewModel() {
 
-    private val _loginResult = MutableLiveData<LoginResult>()
-    val loginResult: LiveData<LoginResult> = _loginResult
-
-    private val loginSuccess = SingleLiveEvent<String>() // Para emitir el rol
-    val loginError = SingleLiveEvent<String>()
+    val loginSuccess = SingleLiveEvent<String>() // Emite el rol en inicio de sesion exitoso
+    val loginError = SingleLiveEvent<String>() // Emite mensaje de error
 
     private val auth = FirebaseAuth.getInstance()
     private val firestore = FirebaseFirestore.getInstance()
@@ -47,7 +41,6 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         firestore.collection("users").document(uid).get().addOnSuccessListener { document ->
             if (document != null && document.exists()) {
                 val role = document.getString("role") ?: "user"
-                _loginResult.value = LoginResult(true, role = role)
                 loginSuccess.postValue(role)
             } else {
                 val msg = "Error al iniciar sesión. Por favor, inténtelo más tarde."
@@ -61,5 +54,3 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 }
-
-data class LoginResult(val success: Boolean, val role: String = "user")
