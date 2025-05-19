@@ -42,8 +42,14 @@ class LoginViewModel : ViewModel() {
     private fun getUserRoleFromFirestore(uid: String) {
         firestore.collection("users").document(uid).get().addOnSuccessListener { document ->
             if (document != null && document.exists()) {
-                val role = document.getString("role") ?: "user"
-                loginSuccess.postValue(role)
+
+                if (document.getString("role") != null) {
+                    loginSuccess.postValue(document.getString("role"))
+                } else {
+                    Log.e("LoginViewModel", "El documento del usuario con UID $uid no contiene campo 'role'")
+                    loginError.postValue(ERROR_GENERIC)
+                }
+
             } else {
                 Log.e("LoginViewModel", "No se encontró el documento del usuario con UID: $uid")
                 loginError.postValue(ERROR_GENERIC)
