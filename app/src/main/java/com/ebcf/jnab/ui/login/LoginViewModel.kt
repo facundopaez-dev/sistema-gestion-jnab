@@ -14,6 +14,11 @@ class LoginViewModel : ViewModel() {
     private val auth = FirebaseAuth.getInstance()
     private val firestore = FirebaseFirestore.getInstance()
 
+    companion object {
+        private const val ERROR_LOGIN = "Correo electrónico o contraseña incorrectos"
+        private const val ERROR_GENERIC = "Error al iniciar sesión. Por favor, inténtelo más tarde."
+    }
+
     fun login(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -22,17 +27,14 @@ class LoginViewModel : ViewModel() {
                     if (user.isEmailVerified) {
                         getUserRoleFromFirestore(user.uid)
                     } else {
-                        val msg = "Correo electrónico o contraseña incorrectos."
-                        loginError.postValue(msg)
+                        loginError.postValue(ERROR_LOGIN)
                     }
                 } else {
-                    val msg = "Error al iniciar sesión. Por favor, inténtelo más tarde."
                     Log.e("LoginViewModel", "Usuario null tras login exitoso para email: $email")
-                    loginError.postValue(msg)
+                    loginError.postValue(ERROR_GENERIC)
                 }
             } else {
-                val msg = "Correo electrónico o contraseña incorrectos."
-                loginError.postValue(msg)
+                loginError.postValue(ERROR_LOGIN)
             }
         }
     }
@@ -43,14 +45,12 @@ class LoginViewModel : ViewModel() {
                 val role = document.getString("role") ?: "user"
                 loginSuccess.postValue(role)
             } else {
-                val msg = "Error al iniciar sesión. Por favor, inténtelo más tarde."
                 Log.e("LoginViewModel", "No se encontró el documento del usuario con UID: $uid")
-                loginError.postValue(msg)
+                loginError.postValue(ERROR_GENERIC)
             }
         }.addOnFailureListener { e ->
-            val msg = "Error al iniciar sesión. Por favor, inténtelo más tarde."
             Log.e("LoginViewModel", "Error al obtener el documento del usuario: ${e.message}", e)
-            loginError.postValue(msg)
+            loginError.postValue(ERROR_GENERIC)
         }
     }
 }
