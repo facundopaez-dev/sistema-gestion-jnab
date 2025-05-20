@@ -6,6 +6,9 @@ import com.ebcf.jnab.utils.SingleLiveEvent
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
+private const val ERROR_LOGIN = "Correo electrónico o contraseña incorrectos"
+private const val ERROR_GENERIC = "Error al iniciar sesión. Por favor, inténtelo más tarde."
+
 class LoginViewModel : ViewModel() {
 
     val loginSuccess = SingleLiveEvent<String>() // Emite el rol en inicio de sesion exitoso
@@ -13,11 +16,6 @@ class LoginViewModel : ViewModel() {
 
     private val auth = FirebaseAuth.getInstance()
     private val firestore = FirebaseFirestore.getInstance()
-
-    companion object {
-        private const val ERROR_LOGIN = "Correo electrónico o contraseña incorrectos"
-        private const val ERROR_GENERIC = "Error al iniciar sesión. Por favor, inténtelo más tarde."
-    }
 
     fun login(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
