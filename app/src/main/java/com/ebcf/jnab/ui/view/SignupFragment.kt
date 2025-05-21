@@ -10,21 +10,20 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.ebcf.jnab.R
-import com.ebcf.jnab.data.model.UserRole
-import com.ebcf.jnab.databinding.FragmentSignupBinding
-import com.ebcf.jnab.util.MIN_PASSWORD_LENGTH
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.firestore.FirebaseFirestore
+import com.ebcf.jnab.R
+import com.ebcf.jnab.data.model.UserRole
+import com.ebcf.jnab.databinding.FragmentSignupBinding
+import com.ebcf.jnab.util.FieldValidator
+import com.ebcf.jnab.util.ERROR_INVALID_PASSWORD
+import com.ebcf.jnab.util.ERROR_INVALID_EMAIL
+import com.ebcf.jnab.util.MIN_PASSWORD_LENGTH
 
 private const val ERROR_INVALID_FIRST_NAME = "Nombre inválido"
 private const val ERROR_INVALID_LAST_NAME = "Apellido inválido"
-private const val ERROR_INVALID_EMAIL = "Correo electrónico no válido"
-private const val ERROR_INVALID_PASSWORD =
-    "La contraseña debe tener al menos $MIN_PASSWORD_LENGTH caracteres"
 private const val ERROR_INVALID_CONFIRM_PASSWORD = "Las contraseñas no coinciden"
 private val NAME_PATTERN = "^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:[- ][A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$".toRegex()
 
@@ -165,51 +164,27 @@ class SignupFragment : Fragment() {
         val password = binding.etPassword.text.toString()
         val confirmPassword = binding.etConfirmPassword.text.toString()
 
-        val isFirstNameValid = validateField(
+        val isFirstNameValid = FieldValidator.validateField(
             NAME_PATTERN.matches(firstName), binding.tilFirstName, ERROR_INVALID_FIRST_NAME
         )
 
-        val isLastNameValid = validateField(
+        val isLastNameValid = FieldValidator.validateField(
             NAME_PATTERN.matches(lastName), binding.tilLastName, ERROR_INVALID_LAST_NAME
         )
 
-        val isEmailValid = validateField(
+        val isEmailValid = FieldValidator.validateField(
             Patterns.EMAIL_ADDRESS.matcher(email).matches(), binding.tilEmail, ERROR_INVALID_EMAIL
         )
 
-        val isPasswordValid = validateField(
+        val isPasswordValid = FieldValidator.validateField(
             password.length >= MIN_PASSWORD_LENGTH, binding.tilPassword, ERROR_INVALID_PASSWORD
         )
 
-        val isConfirmPasswordValid = validateField(
+        val isConfirmPasswordValid = FieldValidator.validateField(
             password == confirmPassword, binding.tilConfirmPassword, ERROR_INVALID_CONFIRM_PASSWORD
         )
 
         return isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid && isConfirmPasswordValid
-    }
-
-    /**
-     * Valida una condicion para un campo y actualiza el estado de error en el TextInputLayout.
-     *
-     * @param condition Condicion que determina si el campo es valido (true si valido, false si no).
-     * @param layout El TextInputLayout asociado al campo que se esta validando.
-     * @param errorMsg Mensaje de error que se mostrara si la condicion es falsa.
-     *
-     * @return `true` si la condicion es verdadera (campo valido), `false` si es falsa (campo invalido).
-     *
-     * Esta funcion establece el mensaje de error en el TextInputLayout si la validacion falla,
-     * o limpia el error si la validacion es exitosa.
-     */
-    private fun validateField(
-        condition: Boolean, layout: TextInputLayout, errorMsg: String
-    ): Boolean {
-        if (!condition) {
-            layout.error = errorMsg
-            return false
-        }
-
-        layout.error = null
-        return true
     }
 
     /**
@@ -226,7 +201,7 @@ class SignupFragment : Fragment() {
         binding.etFirstName.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 val name = binding.etFirstName.text.toString().trim()
-                validateField(
+                FieldValidator.validateField(
                     NAME_PATTERN.matches(name), binding.tilFirstName, ERROR_INVALID_FIRST_NAME
                 )
             }
@@ -235,7 +210,7 @@ class SignupFragment : Fragment() {
         binding.etLastName.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 val name = binding.etLastName.text.toString().trim()
-                validateField(
+                FieldValidator.validateField(
                     NAME_PATTERN.matches(name), binding.tilLastName, ERROR_INVALID_LAST_NAME
                 )
             }
@@ -244,7 +219,7 @@ class SignupFragment : Fragment() {
         binding.etEmail.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 val email = binding.etEmail.text.toString().trim()
-                validateField(
+                FieldValidator.validateField(
                     Patterns.EMAIL_ADDRESS.matcher(email).matches(),
                     binding.tilEmail,
                     ERROR_INVALID_EMAIL
@@ -255,7 +230,7 @@ class SignupFragment : Fragment() {
         binding.etPassword.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 val password = binding.etPassword.text.toString()
-                validateField(
+                FieldValidator.validateField(
                     password.length >= MIN_PASSWORD_LENGTH,
                     binding.tilPassword,
                     ERROR_INVALID_PASSWORD
@@ -267,7 +242,7 @@ class SignupFragment : Fragment() {
             if (!hasFocus) {
                 val password = binding.etPassword.text.toString()
                 val confirmPassword = binding.etConfirmPassword.text.toString()
-                validateField(
+                FieldValidator.validateField(
                     password == confirmPassword,
                     binding.tilConfirmPassword,
                     ERROR_INVALID_CONFIRM_PASSWORD
