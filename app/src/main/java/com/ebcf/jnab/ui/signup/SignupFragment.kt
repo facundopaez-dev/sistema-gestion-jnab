@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.view
+package com.ebcf.jnab.ui.signup
 
 import android.os.Bundle
 import android.util.Log
