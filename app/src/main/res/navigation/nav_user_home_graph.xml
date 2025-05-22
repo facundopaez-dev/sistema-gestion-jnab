@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/navigation_talks"
-        android:name="com.ebcf.jnab.ui.view.TalksListFragment"
+        android:name="com.ebcf.jnab.ui.talk.TalksListFragment"
         android:label="Charlas"
         tools:layout="@layout/fragment_talks_list">
         <argument
@@ -64,7 +64,7 @@
 
     <fragment
         android:id="@+id/talkHistoryFragment"
-        android:name="com.ebcf.jnab.ui.view.TalkHistoryFragment"
+        android:name="com.ebcf.jnab.ui.talk.TalkHistoryFragment"
         android:label="Historial de Charlas"
         tools:layout="@layout/fragment_talk_history">
         <argument

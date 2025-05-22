@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.view
+package com.ebcf.jnab.ui.talk
 
 import android.os.Build
 import android.os.Bundle
@@ -6,17 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toolbar
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebcf.jnab.R
 import com.ebcf.jnab.databinding.FragmentTalksListBinding
-import com.ebcf.jnab.ui.view.adapter.TalksListAdapter
-import com.ebcf.jnab.ui.viewmodel.TalksListViewModel
-import android.util.Log;
 
 
 class TalksListFragment : Fragment() {
