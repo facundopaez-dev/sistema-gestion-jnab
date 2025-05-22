@@ -27,13 +27,13 @@
 
     <fragment
         android:id="@+id/userFragment"
-        android:name="com.ebcf.jnab.ui.view.user.UserFragment"
+        android:name="com.ebcf.jnab.ui.UserFragment"
         android:label="fragment_user"
         tools:layout="@layout/fragment_user" />
 
     <fragment
         android:id="@+id/organizerFragment"
-        android:name="com.ebcf.jnab.ui.view.organizer.OrganizerFragment"
+        android:name="com.ebcf.jnab.ui.OrganizerFragment"
         android:label="fragment_organizer"
         tools:layout="@layout/fragment_organizer" />
     <fragment
