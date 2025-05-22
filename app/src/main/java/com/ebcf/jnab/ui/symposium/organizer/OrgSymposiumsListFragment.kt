@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.view.organizer
+package com.ebcf.jnab.ui.symposium.organizer
 
 import android.os.Build
 import android.os.Bundle
@@ -11,8 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebcf.jnab.databinding.FragmentOrgSymposiumsListBinding
 import com.ebcf.jnab.domain.usecase.FormatDateUseCase
-import com.ebcf.jnab.ui.adapter.organizer.OrganizerSymposiumAdapter
-import com.ebcf.jnab.ui.viewmodel.SymposiumsListViewModel
+import com.ebcf.jnab.ui.symposium.SymposiumsListViewModel
 
 class OrgSymposiumsListFragment : Fragment() {
 

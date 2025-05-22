@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.view
+package com.ebcf.jnab.ui.symposium.user
 
 import android.os.Build
 import android.os.Bundle
@@ -12,11 +12,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebcf.jnab.R
 import com.ebcf.jnab.databinding.FragmentSymposiumDetailBinding
-import com.ebcf.jnab.databinding.FragmentSymposiumsListBinding
 import com.ebcf.jnab.domain.usecase.FormatDateUseCase
-import com.ebcf.jnab.ui.view.adapter.SymposiumsListAdapter
 import com.ebcf.jnab.ui.view.adapter.TalksListAdapter
-import com.ebcf.jnab.ui.viewmodel.SymposiumsListViewModel
+import com.ebcf.jnab.ui.symposium.SymposiumsListViewModel
 import com.ebcf.jnab.ui.viewmodel.TalksListViewModel
 
 class SymposiumDetailFragment : Fragment() {

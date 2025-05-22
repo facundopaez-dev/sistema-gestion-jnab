@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.view
+package com.ebcf.jnab.ui.symposium.user
 
 import android.os.Build
 import android.os.Bundle
@@ -8,15 +8,11 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ebcf.jnab.R
 import com.ebcf.jnab.databinding.FragmentSymposiumsListBinding
 import com.ebcf.jnab.domain.usecase.FormatDateUseCase
-import com.ebcf.jnab.ui.view.adapter.SymposiumsListAdapter
-import com.ebcf.jnab.ui.viewmodel.SymposiumsListViewModel
 
-class SymposiumsListFragment : Fragment() {
+class AllSymposiumsListFragment : Fragment() {
 
     private var _binding: FragmentSymposiumsListBinding? = null
     private val binding get() = _binding!!
@@ -31,7 +27,7 @@ class SymposiumsListFragment : Fragment() {
         val root: View = binding.root
 
         // Crear el ViewModel sin Factory
-        val symposiumsListViewModel = ViewModelProvider(this).get(SymposiumsListViewModel::class.java)
+        val allSymposiumsListViewModel = ViewModelProvider(this).get(AllSymposiumsListViewModel::class.java)
 
         // Crear una instancia del caso de uso
         val formatDateUseCase = FormatDateUseCase()
@@ -41,11 +37,8 @@ class SymposiumsListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         // Observar ViewModel para la lista de simposios
-        symposiumsListViewModel.symposiums.observe(viewLifecycleOwner) { symposiums ->
-            recyclerView.adapter = SymposiumsListAdapter(symposiums, formatDateUseCase) { symposium ->
-                val action = SymposiumsListFragmentDirections.actionNavigationSymposiumsToSymposiumDetailFragment(symposium.id)
-                findNavController().navigate(action)
-            }
+        allSymposiumsListViewModel.symposiums.observe(viewLifecycleOwner) { symposiums ->
+            recyclerView.adapter = SymposiumsListAdapter(symposiums, formatDateUseCase , {}) //TODO cambiar esto
         }
 
         return root

@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/orgSymposiumsListFragment"
-        android:name="com.ebcf.jnab.ui.view.organizer.OrgSymposiumsListFragment"
+        android:name="com.ebcf.jnab.ui.symposium.organizer.OrgSymposiumsListFragment"
         android:label="fragment_org_symposiums_list"
         tools:layout="@layout/fragment_org_symposiums_list" />
 

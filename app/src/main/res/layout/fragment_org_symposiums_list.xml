@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.organizer.OrgSymposiumsListFragment">
+    tools:context=".ui.symposium.organizer.OrgSymposiumsListFragment">
 
     <!-- RecyclerView para mostrar los elementos de la lista -->
     <androidx.recyclerview.widget.RecyclerView

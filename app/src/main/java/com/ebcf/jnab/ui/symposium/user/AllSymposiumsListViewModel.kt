@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.viewmodel
+package com.ebcf.jnab.ui.symposium.user
 
 import android.os.Build
 import androidx.annotation.RequiresApi
