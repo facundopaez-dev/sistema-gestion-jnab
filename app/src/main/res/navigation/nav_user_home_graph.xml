@@ -33,7 +33,7 @@
 
     <fragment
         android:id="@+id/navigation_speakers"
-        android:name="com.ebcf.jnab.ui.view.SpeakersListFragment"
+        android:name="com.ebcf.jnab.ui.speaker.list.SpeakersListFragment"
         android:label="Expositores"
         tools:layout="@layout/fragment_speakers_list">
         <action
@@ -47,7 +47,7 @@
 
     <fragment
         android:id="@+id/speakerDetailFragment"
-        android:name="com.ebcf.jnab.ui.view.SpeakerDetailFragment"
+        android:name="com.ebcf.jnab.ui.speaker.detail.SpeakerDetailFragment"
         android:label="Detalle del expositor"
         tools:layout="@layout/fragment_speaker_detail">
         <argument

@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.view.adapter
+package com.ebcf.jnab.ui.speaker.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

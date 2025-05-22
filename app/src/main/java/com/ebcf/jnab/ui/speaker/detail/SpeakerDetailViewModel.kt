@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.viewmodel
+package com.ebcf.jnab.ui.speaker.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

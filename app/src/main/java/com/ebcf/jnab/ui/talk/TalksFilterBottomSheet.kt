@@ -15,7 +15,7 @@ import com.ebcf.jnab.R
 import com.ebcf.jnab.domain.model.SpeakerModel
 import com.ebcf.jnab.domain.model.SymposiumModel
 import com.ebcf.jnab.databinding.FragmentTalksFilterBottomSheetBinding
-import com.ebcf.jnab.ui.viewmodel.SpeakersListViewModel
+import com.ebcf.jnab.ui.speaker.list.SpeakersListViewModel
 import com.ebcf.jnab.ui.symposium.SymposiumsListViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.datepicker.MaterialDatePicker
