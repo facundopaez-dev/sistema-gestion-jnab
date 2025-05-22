@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebcf.jnab.R
 import com.ebcf.jnab.databinding.FragmentSubmissionsListBinding
 import com.ebcf.jnab.domain.usecase.FormatDateUseCase
-import com.ebcf.jnab.ui.view.organizer.FilterBottomSheetFragment
 
 class SubmissionsListFragment : Fragment() {
 
@@ -81,7 +80,7 @@ class SubmissionsListFragment : Fragment() {
     }
 
     fun showFilterBottomSheet() {
-        val bottomSheet = FilterBottomSheetFragment()
+        val bottomSheet = SubmissionsFilterBottomSheetFragment()
         bottomSheet.onFilterSelected = { selectedItem ->
             // Si el item seleccionado es "Todos", se pasa null para mostrar todos los trabajos
             if (selectedItem == null) {
