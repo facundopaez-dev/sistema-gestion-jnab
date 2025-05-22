@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.view
+package com.ebcf.jnab.ui.speaker.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebcf.jnab.databinding.FragmentSpeakersListBinding
-import com.ebcf.jnab.ui.view.adapter.SpeakersListAdapter
-import com.ebcf.jnab.ui.viewmodel.SpeakersListViewModel
 
 class SpeakersListFragment : Fragment() {
 
@@ -34,8 +32,10 @@ class SpeakersListFragment : Fragment() {
         speakersListViewModel.speakers.observe(viewLifecycleOwner) { speakers ->
             recyclerView.adapter = SpeakersListAdapter(speakers) { selectedSpeaker ->
                 // Aquí podés navegar al fragmento de detalle, por ejemplo:
-                val action = SpeakersListFragmentDirections
-                    .actionSpeakersListFragmentToSpeakerDetailFragment(selectedSpeaker.id)
+                val action =
+                    SpeakersListFragmentDirections.actionSpeakersListFragmentToSpeakerDetailFragment(
+                        selectedSpeaker.id
+                    )
                 findNavController().navigate(action)
             }
         }

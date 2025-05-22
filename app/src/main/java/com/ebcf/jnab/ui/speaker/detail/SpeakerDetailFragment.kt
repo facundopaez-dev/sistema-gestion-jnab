@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.view
+package com.ebcf.jnab.ui.speaker.detail
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ebcf.jnab.databinding.FragmentSpeakerDetailBinding
-import com.ebcf.jnab.ui.viewmodel.SpeakerDetailViewModel
 import com.ebcf.jnab.R
 import androidx.navigation.fragment.findNavController
 
