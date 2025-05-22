@@ -1,17 +1,17 @@
-package com.ebcf.jnab.ui.view.organizer
+package com.ebcf.jnab.ui.submission
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ebcf.jnab.domain.model.SubmissionStatus
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.ebcf.jnab.domain.model.SubmissionStatus
 import com.ebcf.jnab.R
-import com.ebcf.jnab.databinding.BottomSheetFilterBinding
+import com.ebcf.jnab.databinding.FragmentSubmissionsFilterBottomSheetBinding
 
-class FilterBottomSheetFragment : BottomSheetDialogFragment() {
+class SubmissionsFilterBottomSheetFragment : BottomSheetDialogFragment() {
 
-    private var _binding: BottomSheetFilterBinding? = null
+    private var _binding: FragmentSubmissionsFilterBottomSheetBinding? = null
     private val binding get() = _binding!!
 
     var onFilterSelected: ((SubmissionStatus?) -> Unit)? = null
@@ -20,7 +20,7 @@ class FilterBottomSheetFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = BottomSheetFilterBinding.inflate(inflater, container, false)
+        _binding = FragmentSubmissionsFilterBottomSheetBinding.inflate(inflater, container, false)
         return binding.root
     }
 
