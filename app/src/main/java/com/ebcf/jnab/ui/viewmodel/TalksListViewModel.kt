@@ -7,9 +7,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ebcf.jnab.data.repository.TalkRepository
-import com.ebcf.jnab.data.model.TalkModel
+import com.ebcf.jnab.domain.model.TalkModel
 import java.time.LocalDate
-import java.time.LocalDateTime
 
 @RequiresApi(Build.VERSION_CODES.O)
 class TalksListViewModel : ViewModel() {

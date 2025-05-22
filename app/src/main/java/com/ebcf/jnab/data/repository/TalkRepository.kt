@@ -2,9 +2,8 @@ package com.ebcf.jnab.data.repository
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.ebcf.jnab.data.model.TalkModel
+import com.ebcf.jnab.domain.model.TalkModel
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.LocalTime
 
 class TalkRepository {

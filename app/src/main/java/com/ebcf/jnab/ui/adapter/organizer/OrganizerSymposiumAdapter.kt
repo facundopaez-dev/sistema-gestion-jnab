@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.ebcf.jnab.data.model.SymposiumModel
+import com.ebcf.jnab.domain.model.SymposiumModel
 import com.ebcf.jnab.databinding.ItemSymposiumOrganizerBinding
 import com.ebcf.jnab.domain.usecase.FormatDateUseCase
 

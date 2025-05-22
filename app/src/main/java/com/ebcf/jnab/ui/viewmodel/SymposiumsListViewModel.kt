@@ -5,7 +5,7 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.ebcf.jnab.data.model.SymposiumModel
+import com.ebcf.jnab.domain.model.SymposiumModel
 import com.ebcf.jnab.data.repository.SymposiumRepository
 
 class SymposiumsListViewModel : ViewModel() {

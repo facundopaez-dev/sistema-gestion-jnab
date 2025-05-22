@@ -1,4 +1,4 @@
-package com.ebcf.jnab.data.model
+package com.ebcf.jnab.domain.model
 
 import java.time.LocalDate
 import java.time.LocalTime

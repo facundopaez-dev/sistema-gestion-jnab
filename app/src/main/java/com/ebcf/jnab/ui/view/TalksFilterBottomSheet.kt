@@ -3,22 +3,18 @@ package com.ebcf.jnab.ui.view
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.ebcf.jnab.R
-import com.ebcf.jnab.data.model.SpeakerModel
-import com.ebcf.jnab.data.model.SymposiumModel
-import com.ebcf.jnab.databinding.FragmentSymposiumsListBinding
+import com.ebcf.jnab.domain.model.SpeakerModel
+import com.ebcf.jnab.domain.model.SymposiumModel
 import com.ebcf.jnab.databinding.FragmentTalksFilterBottomSheetBinding
-import com.ebcf.jnab.databinding.ItemSymposiumBinding
 import com.ebcf.jnab.ui.viewmodel.SpeakersListViewModel
 import com.ebcf.jnab.ui.viewmodel.SymposiumsListViewModel
 import com.ebcf.jnab.ui.viewmodel.TalksListViewModel
@@ -26,7 +22,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.time.Instant
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.ZoneId
 
 

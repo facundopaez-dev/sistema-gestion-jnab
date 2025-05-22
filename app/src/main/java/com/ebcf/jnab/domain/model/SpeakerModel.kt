@@ -1,4 +1,4 @@
-package com.ebcf.jnab.data.model
+package com.ebcf.jnab.domain.model
 
 data class SpeakerModel(
     val id: Int,

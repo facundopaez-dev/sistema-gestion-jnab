@@ -3,10 +3,10 @@ package com.ebcf.jnab.ui.view.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ebcf.jnab.data.model.SpeakerModel
+import com.ebcf.jnab.domain.model.SpeakerModel
 import com.ebcf.jnab.databinding.ItemSpeakerBinding
 
-class SpeakersListAdapter(private val speakers: List<SpeakerModel> , private val onItemClick: (SpeakerModel) -> Unit
+class SpeakersListAdapter(private val speakers: List<SpeakerModel>, private val onItemClick: (SpeakerModel) -> Unit
 ) :
     RecyclerView.Adapter<SpeakersListAdapter.SpeakerViewHolder>() {
 
