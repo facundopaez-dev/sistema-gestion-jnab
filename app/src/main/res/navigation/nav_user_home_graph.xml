@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_symposiums"
-        android:name="com.ebcf.jnab.ui.view.SymposiumsListFragment"
+        android:name="com.ebcf.jnab.ui.symposium.user.SymposiumsListFragment"
         android:label="@string/title_symposiums"
         tools:layout="@layout/fragment_symposiums_list" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/navigation_agenda"
-        android:name="com.ebcf.jnab.ui.view.AllSymposiumsListFragment"
+        android:name="com.ebcf.jnab.ui.symposium.user.AllSymposiumsListFragment"
         android:label="Agenda"
         tools:layout="@layout/fragment_all_symposiums_list" />
 
@@ -75,7 +75,7 @@
 
     <fragment
         android:id="@+id/symposiumDetailFragment"
-        android:name="com.ebcf.jnab.ui.view.SymposiumDetailFragment"
+        android:name="com.ebcf.jnab.ui.symposium.user.SymposiumDetailFragment"
         android:label="SymposiumDetailFragment" >
         <argument
             android:name="symposiumId"

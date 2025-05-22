@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.adapter.organizer
+package com.ebcf.jnab.ui.symposium.user
 
 import android.os.Build
 import android.view.LayoutInflater
@@ -6,34 +6,39 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.ebcf.jnab.domain.model.SymposiumModel
-import com.ebcf.jnab.databinding.ItemSymposiumOrganizerBinding
+import com.ebcf.jnab.databinding.ItemSymposiumBinding
 import com.ebcf.jnab.domain.usecase.FormatDateUseCase
 
-class OrganizerSymposiumAdapter(
+class SymposiumsListAdapter(
     private val symposiums: List<SymposiumModel>,
-    private val formatDateUseCase: FormatDateUseCase
-) : RecyclerView.Adapter<OrganizerSymposiumAdapter.SymposiumViewHolder>() {
+    private val formatDateUseCase: FormatDateUseCase,
+    private val onItemClick: (SymposiumModel) -> Unit
 
-    class SymposiumViewHolder(private val binding: ItemSymposiumOrganizerBinding) :
+) : RecyclerView.Adapter<SymposiumsListAdapter.SymposiumViewHolder>() {
+
+    class SymposiumViewHolder(private val binding: ItemSymposiumBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(symposium: SymposiumModel, formatDateUseCase: FormatDateUseCase) {
-            binding.title.text = symposium.title
-            binding.startTime.text = formatDateUseCase.execute(symposium.startDateTime)
+            binding.symposiumTitle.text = symposium.title
+            binding.dateTime.text = formatDateUseCase.execute(symposium.startDateTime)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SymposiumViewHolder {
-        val binding = ItemSymposiumOrganizerBinding.inflate(
+        val binding = ItemSymposiumBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-
         return SymposiumViewHolder(binding)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: SymposiumViewHolder, position: Int) {
-        holder.bind(symposiums[position], formatDateUseCase)
+        val symposium = symposiums[position]
+        holder.bind(symposium, formatDateUseCase)
+        holder.itemView.setOnClickListener {
+            onItemClick(symposium)
+        }
     }
 
     override fun getItemCount(): Int = symposiums.size
