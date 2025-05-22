@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ebcf.jnab.R
-import com.ebcf.jnab.data.model.UserRole
+import com.ebcf.jnab.domain.model.UserRole
 import com.ebcf.jnab.databinding.FragmentSignupBinding
 import com.ebcf.jnab.util.FieldValidator
 import com.ebcf.jnab.util.ERROR_INVALID_PASSWORD

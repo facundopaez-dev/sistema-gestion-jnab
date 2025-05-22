@@ -1,4 +1,4 @@
-package com.ebcf.jnab.data.model
+package com.ebcf.jnab.domain.model
 
 enum class UserRole(val value: String) {
     ASSISTANT("assistant"),
