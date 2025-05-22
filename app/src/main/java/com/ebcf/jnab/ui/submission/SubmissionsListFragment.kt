@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.view.organizer
+package com.ebcf.jnab.ui.submission
 
 import android.os.Build
 import android.os.Bundle
@@ -19,8 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebcf.jnab.R
 import com.ebcf.jnab.databinding.FragmentSubmissionsListBinding
 import com.ebcf.jnab.domain.usecase.FormatDateUseCase
-import com.ebcf.jnab.ui.adapter.organizer.SubmissionAdapter
-import com.ebcf.jnab.ui.viewmodel.organizer.SubmissionsListViewModel
+import com.ebcf.jnab.ui.view.organizer.FilterBottomSheetFragment
 
 class SubmissionsListFragment : Fragment() {
 

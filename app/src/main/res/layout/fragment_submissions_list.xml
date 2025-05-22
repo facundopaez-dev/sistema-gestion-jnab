@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.organizer.SubmissionsListFragment">
+    tools:context=".ui.submission.SubmissionsListFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_submissions"

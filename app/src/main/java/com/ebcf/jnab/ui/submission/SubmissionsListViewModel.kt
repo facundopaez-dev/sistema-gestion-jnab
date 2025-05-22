@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.viewmodel.organizer
+package com.ebcf.jnab.ui.submission
 
 import android.os.Build
 import androidx.annotation.RequiresApi

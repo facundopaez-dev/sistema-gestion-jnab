@@ -12,7 +12,7 @@
     <!-- setupWithNavController() funcione correctamente -->
     <fragment
         android:id="@+id/submissionsListFragment"
-        android:name="com.ebcf.jnab.ui.view.organizer.SubmissionsListFragment"
+        android:name="com.ebcf.jnab.ui.submission.SubmissionsListFragment"
         android:label="fragment_submissions_list"
         tools:layout="@layout/fragment_submissions_list" />
 
