@@ -2,14 +2,12 @@ package com.ebcf.jnab.ui.view.adapter
 
 import android.os.Build
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.ebcf.jnab.data.model.TalkModel
+import com.ebcf.jnab.domain.model.TalkModel
 import com.ebcf.jnab.databinding.ItemTalkSpeakerBinding
 import com.ebcf.jnab.domain.usecase.FormatDateUseCase
-import java.time.format.DateTimeFormatter
 
 class TalkHistoryAdapter(private val talks: List<TalkModel>, private val formatDateUseCase: FormatDateUseCase) :
     RecyclerView.Adapter<TalkHistoryAdapter.TalkHistoryViewHolder>() {
@@ -17,7 +15,7 @@ class TalkHistoryAdapter(private val talks: List<TalkModel>, private val formatD
     inner class TalkHistoryViewHolder(private val binding: ItemTalkSpeakerBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
-        fun bind(talk: TalkModel,formatDateUseCase: FormatDateUseCase) {
+        fun bind(talk: TalkModel, formatDateUseCase: FormatDateUseCase) {
             binding.textView.text = talk.title
             binding.dateTime.text = formatDateUseCase.formatDateTime(talk.date,talk.startTime)
 

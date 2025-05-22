@@ -2,7 +2,7 @@ package com.ebcf.jnab.data.repository
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.ebcf.jnab.data.model.SymposiumModel
+import com.ebcf.jnab.domain.model.SymposiumModel
 import java.time.LocalDateTime
 
 class SymposiumRepository {

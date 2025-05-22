@@ -1,6 +1,6 @@
 package com.ebcf.jnab.data.repository
 
-import com.ebcf.jnab.data.model.SpeakerModel
+import com.ebcf.jnab.domain.model.SpeakerModel
 
 class SpeakerRepository {
 

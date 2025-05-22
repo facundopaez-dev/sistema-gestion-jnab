@@ -4,9 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ebcf.jnab.R
-import com.ebcf.jnab.data.model.TalkModel
+import com.ebcf.jnab.domain.model.TalkModel
 import com.ebcf.jnab.databinding.ItemTalkBinding
-import com.ebcf.jnab.ui.viewmodel.TalksListViewModel
 
 
 class TalksListAdapter(
