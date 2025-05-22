@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.talk
+package com.ebcf.jnab.ui.talk.history
 
 import android.os.Build
 import android.view.LayoutInflater

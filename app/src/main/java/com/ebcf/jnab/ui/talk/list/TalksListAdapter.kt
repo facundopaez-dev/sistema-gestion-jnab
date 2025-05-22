@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.talk
+package com.ebcf.jnab.ui.talk.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

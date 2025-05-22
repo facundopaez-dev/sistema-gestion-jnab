@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.talk
+package com.ebcf.jnab.ui.talk.history
 
 import android.os.Build
 import android.os.Bundle
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebcf.jnab.R
 import com.ebcf.jnab.databinding.FragmentTalkHistoryBinding
 import com.ebcf.jnab.domain.usecase.FormatDateUseCase
+import com.ebcf.jnab.ui.talk.list.TalksListViewModel
 
 class TalkHistoryFragment : Fragment() {
 

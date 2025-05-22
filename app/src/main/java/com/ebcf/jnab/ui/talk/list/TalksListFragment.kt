@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.talk
+package com.ebcf.jnab.ui.talk.list
 
 import android.os.Build
 import android.os.Bundle
@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebcf.jnab.R
 import com.ebcf.jnab.databinding.FragmentTalksListBinding
+import com.ebcf.jnab.ui.talk.TalksFilterBottomSheet
 
 
 class TalksListFragment : Fragment() {

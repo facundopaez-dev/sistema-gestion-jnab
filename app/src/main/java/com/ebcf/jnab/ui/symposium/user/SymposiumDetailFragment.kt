@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebcf.jnab.R
 import com.ebcf.jnab.databinding.FragmentSymposiumDetailBinding
 import com.ebcf.jnab.domain.usecase.FormatDateUseCase
-import com.ebcf.jnab.ui.talk.TalksListAdapter
+import com.ebcf.jnab.ui.talk.list.TalksListAdapter
 import com.ebcf.jnab.ui.symposium.SymposiumsListViewModel
-import com.ebcf.jnab.ui.talk.TalksListViewModel
+import com.ebcf.jnab.ui.talk.list.TalksListViewModel
 
 class SymposiumDetailFragment : Fragment() {
 
