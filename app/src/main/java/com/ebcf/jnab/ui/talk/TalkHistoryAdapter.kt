@@ -1,4 +1,4 @@
-package com.ebcf.jnab.ui.view.adapter
+package com.ebcf.jnab.ui.talk
 
 import android.os.Build
 import android.view.LayoutInflater
