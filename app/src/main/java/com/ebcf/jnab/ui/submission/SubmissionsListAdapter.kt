@@ -11,10 +11,10 @@ import com.ebcf.jnab.domain.model.SubmissionStatus
 import com.ebcf.jnab.domain.usecase.FormatDateUseCase
 import java.time.format.DateTimeFormatter
 
-class SubmissionAdapter(
+class SubmissionsListAdapter(
     private val allSubmissions: List<Submission>,
     private val formatDateUseCase: FormatDateUseCase
-) : RecyclerView.Adapter<SubmissionAdapter.SubmissionViewHolder>() {
+) : RecyclerView.Adapter<SubmissionsListAdapter.SubmissionViewHolder>() {
 
     private var filteredSubmissions: List<Submission> = allSubmissions
 
