@@ -4,9 +4,8 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.services)
     id("androidx.navigation.safeargs")
-
+    kotlin("kapt")
 }
-
 
 android {
     namespace = "com.ebcf.jnab"
@@ -26,8 +25,7 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -44,13 +42,11 @@ android {
     }
 }
 
-
 dependencies {
     val nav_version = "2.8.9"
 
     // Jetpack Compose integration
     implementation("androidx.navigation:navigation-compose:$nav_version")
-
 
     // Views/Fragments integration
     implementation("androidx.navigation:navigation-fragment:$nav_version")
@@ -92,6 +88,18 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.java.jwt)
+
+    // Implementacion principal de Room: la base para trabajar con la base de datos SQLite
+    implementation(libs.room.runtime)
+
+    // Extensiones para Kotlin y soporte a corrutinas en Room (suspend functions, Flow, etc.)
+    implementation(libs.room.ktx)
+
+    // Procesador de anotaciones para Room, necesario para generar el codigo automaticamente
+    kapt(libs.room.compiler)
+
+    // Biblioteca para hacer pruebas unitarias/instrumentadas con Room (base de datos en memoria, etc.)
+    testImplementation(libs.room.testing)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
