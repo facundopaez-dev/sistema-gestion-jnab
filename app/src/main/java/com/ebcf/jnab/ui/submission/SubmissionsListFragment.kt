@@ -24,7 +24,7 @@ class SubmissionsListFragment : Fragment() {
 
     private var _binding: FragmentSubmissionsListBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapter: SubmissionAdapter
+    private lateinit var adapter: SubmissionsListAdapter
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -45,7 +45,7 @@ class SubmissionsListFragment : Fragment() {
         // Observa el ViewModel para la lista de trabajos
         submissionListViewModel.submissions.observe(viewLifecycleOwner) { submissions ->
             // Se instancia el adaptador con la lista de trabajos
-            adapter = SubmissionAdapter(submissions, formatDateUseCase)
+            adapter = SubmissionsListAdapter(submissions, formatDateUseCase)
             recyclerView.adapter = adapter
         }
 
