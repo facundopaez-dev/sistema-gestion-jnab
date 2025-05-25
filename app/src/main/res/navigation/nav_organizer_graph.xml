@@ -22,4 +22,11 @@
         android:label="fragment_org_symposiums_list"
         tools:layout="@layout/fragment_org_symposiums_list" />
 
+
+    <fragment
+        android:id="@+id/navigation_mapa_organizer"
+        android:name="com.ebcf.jnab.ui.map.organizer.OrganizerMapFragment"
+        android:label="Mapa"
+        tools:layout="@layout/fragment_map_organizer" />
+
 </navigation>

@@ -29,4 +29,12 @@
     <string name="signup_button_register">Registrarse</string>
     <string name="signup_text_have_account">¿Tiene una cuenta? Inicie sesión</string>
     <string name="text_no_account_register">¿No tiene una cuenta? Regístrese</string>
+
+    <string-array name="marker_types">
+        <item>Alojamiento</item>
+        <item>Restaurante</item>
+        <item>Agencia</item>
+        <item>Otro</item>
+    </string-array>
+
 </resources>

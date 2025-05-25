@@ -9,4 +9,8 @@
         android:id="@+id/orgSymposiumsListFragment"
         android:icon="@drawable/baseline_library_books_24"
         android:title="@string/title_symposiums" />
+    <item
+        android:id="@+id/navigation_mapa_organizer"
+        android:title="Mapa"
+        android:icon="@drawable/icons8_google_maps" />
 </menu>

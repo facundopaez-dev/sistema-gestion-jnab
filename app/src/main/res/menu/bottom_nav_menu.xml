@@ -21,6 +21,9 @@
         android:title="@string/title_speakers"
         android:icon="@drawable/baseline_emoji_people_24"/>
 
-
+    <item
+        android:id="@+id/navigation_mapa_user"
+        android:title="Mapa"
+        android:icon="@drawable/icons8_google_maps" />
 
 </menu>
