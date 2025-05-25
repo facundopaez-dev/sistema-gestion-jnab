@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SistemaGestionJnab"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -24,9 +28,13 @@
         </activity>
     </application>
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
     <!-- Permiso necesario para que una biblioteca (como la de Firebase) se
        conecte a sus servidores -->
     <uses-permission android:name="android.permission.INTERNET" />
+
 
     <!-- Permite a Firebase (y otras bibliotecas) verificar el estado de la red,
        por ejemplo, para manejar errores si no hay conexion -->

@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/inputTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Título del marcador" />
+
+    <EditText
+        android:id="@+id/inputDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descripción"
+        android:inputType="textMultiLine"
+        android:minLines="2"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Título antes del Spinner -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:layout_marginTop="8dp"
+        android:text="Categoría"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spinnerType"
+        android:layout_width="match_parent"
+        android:layout_height="35dp" />
+</LinearLayout>
