@@ -76,7 +76,8 @@
     <fragment
         android:id="@+id/symposiumDetailFragment"
         android:name="com.ebcf.jnab.ui.symposium.user.SymposiumDetailFragment"
-        android:label="SymposiumDetailFragment" >
+        android:label="SymposiumDetailFragment"
+        tools:layout="@layout/fragment_symposium_detail">
         <argument
             android:name="symposiumId"
             app:argType="integer" />
