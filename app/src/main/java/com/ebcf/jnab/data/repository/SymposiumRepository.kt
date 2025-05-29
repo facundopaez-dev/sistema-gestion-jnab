@@ -14,7 +14,6 @@ class SymposiumRepository {
             title = "Antropología Biológica 2025",
             description = "Un simposio sobre avances en la investigación de la antropología biológica.",
             startDateTime = LocalDateTime.of(2025, 4, 22, 9, 0),
-            endDateTime = LocalDateTime.of(2025, 4, 22, 11, 0),
             talks = emptyList()
         ),
         SymposiumModel(
@@ -22,7 +21,6 @@ class SymposiumRepository {
             title = "Evolución Humana",
             description = "Simposio que cubre temas relacionados con la evolución humana.",
             startDateTime = LocalDateTime.of(2025, 4, 23, 10, 0),
-            endDateTime = LocalDateTime.of(2025, 4, 23, 12, 0),
             talks = emptyList()
         ),
         SymposiumModel(
@@ -30,7 +28,6 @@ class SymposiumRepository {
             title = "Biodiversidad Humana",
             description = "Un análisis sobre la biodiversidad en los seres humanos.",
             startDateTime = LocalDateTime.of(2025, 4, 23, 14, 0),
-            endDateTime = LocalDateTime.of(2025, 4, 23, 16, 0),
             talks = emptyList()
         ),
         SymposiumModel(
@@ -38,7 +35,6 @@ class SymposiumRepository {
             title = "Genómica y Adaptación Humana",
             description = "Exploración de cómo la genómica ha influido en la adaptación humana.",
             startDateTime = LocalDateTime.of(2025, 4, 24, 11, 30),
-            endDateTime = LocalDateTime.of(2025, 4, 24, 13, 30),
             talks = emptyList()
         ),
         SymposiumModel(
@@ -46,7 +42,6 @@ class SymposiumRepository {
             title = "Simposio de Paleontología y Comportamiento",
             description = "Discusión sobre el comportamiento humano a través de hallazgos paleontológicos.",
             startDateTime = LocalDateTime.of(2025, 4, 25, 13, 0),
-            endDateTime = LocalDateTime.of(2025, 4, 25, 15, 0),
             talks = emptyList()
         ),
         SymposiumModel(
@@ -54,7 +49,6 @@ class SymposiumRepository {
             title = "Migraciones Humanas Antiguas",
             description = "Estudio de las migraciones humanas prehistóricas y su impacto genético.",
             startDateTime = LocalDateTime.of(2025, 4, 25, 18, 30),
-            endDateTime = LocalDateTime.of(2025, 4, 25, 20, 30),
             talks = emptyList()
         ),
         SymposiumModel(
@@ -62,7 +56,6 @@ class SymposiumRepository {
             title = "Simposio de Antropología Forense",
             description = "Avances en técnicas forenses para el estudio de restos humanos.",
             startDateTime = LocalDateTime.of(2025, 4, 26, 9, 0),
-            endDateTime = LocalDateTime.of(2025, 4, 26, 11, 0),
             talks = emptyList()
         )
     )

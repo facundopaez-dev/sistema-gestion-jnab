@@ -5,25 +5,30 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.ebcf.jnab.domain.model.SymposiumModel
-import com.ebcf.jnab.data.repository.SymposiumRepository
+import com.ebcf.jnab.domain.repository.SymposiumRepository
+import kotlinx.coroutines.launch
 
-class SymposiumsListViewModel : ViewModel() {
+@RequiresApi(Build.VERSION_CODES.O)
+class SymposiumsListViewModel(
+    private val repository: SymposiumRepository
+) : ViewModel() {
 
-    private val repository = SymposiumRepository()
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private val _symposiums = MutableLiveData<List<SymposiumModel>>().apply {
-        value = repository.getAll()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
+    private val _symposiums = MutableLiveData<List<SymposiumModel>>()
     val symposiums: LiveData<List<SymposiumModel>> = _symposiums
 
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun getSymposiumById(id: Int): SymposiumModel? {
-        return _symposiums.value?.firstOrNull { it.id == id }
+    init {
+        viewModelScope.launch {
+            repository.syncFromRemote() // Trae los simposios desde Firestore y los guarda en Room
+            _symposiums.value = repository.getAll() // Obtiene los simposios desde Room
+        }
     }
 
+    fun getById(id: Int, onResult: (SymposiumModel?) -> Unit) {
+        viewModelScope.launch {
+            val symposium = repository.getById(id)
+            onResult(symposium)
+        }
+    }
 }

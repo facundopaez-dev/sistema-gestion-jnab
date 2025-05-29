@@ -92,6 +92,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.java.jwt)
+    implementation(libs.androidx.junit.ktx)
 
     // Implementacion principal de Room: la base para trabajar con la base de datos SQLite
     implementation(libs.room.runtime)
@@ -105,6 +106,8 @@ dependencies {
     // Biblioteca para hacer pruebas unitarias/instrumentadas con Room (base de datos en memoria, etc.)
     testImplementation(libs.room.testing)
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -119,5 +122,4 @@ secrets {
     // 2. Add this line, where YOUR_API_KEY is your API key:
     //        MAPS_API_KEY=YOUR_API_KEY
     propertiesFileName = "local.properties"
-
 }
