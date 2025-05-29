@@ -11,6 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebcf.jnab.R
+import com.ebcf.jnab.data.repository.DefaultSymposiumRepository
+import com.ebcf.jnab.data.source.local.DatabaseProvider
+import com.ebcf.jnab.data.source.remote.FirebaseFirestoreProvider
+import com.ebcf.jnab.data.source.remote.FirestoreSymposiumDataSource
 import com.ebcf.jnab.databinding.FragmentSymposiumDetailBinding
 import com.ebcf.jnab.domain.usecase.FormatDateUseCase
 import com.ebcf.jnab.ui.talk.list.TalksListAdapter
@@ -38,19 +42,22 @@ class SymposiumDetailFragment : Fragment() {
 
 
         // Crear el ViewModel sin Factory
-        val talksListViewModel = ViewModelProvider(this).get(TalksListViewModel::class.java)
+        val talksListViewModel = ViewModelProvider(this)[TalksListViewModel::class.java]
 
-        val symposiumsListViewModel = ViewModelProvider(this).get(SymposiumsListViewModel::class.java)
+        val dao = DatabaseProvider.getDatabase(requireContext()).symposiumDao()
+        val remoteDataSource = FirestoreSymposiumDataSource(FirebaseFirestoreProvider.provide())
+        val repository = DefaultSymposiumRepository(dao, remoteDataSource)
+        val symposiumsListViewModel = SymposiumsListViewModel(repository)
 
         // Crear una instancia del caso de uso
         val formatDateUseCase = FormatDateUseCase()
 
-        val symposium = symposiumsListViewModel.getSymposiumById(symposiumId)
-
-        symposium?.let {
-            binding.textViewTitle.text = it.title
-            binding.textViewDescription.text = it.description
-            binding.textViewDates.text = formatDateUseCase.formatRange(it.startDateTime, it.endDateTime)
+        symposiumsListViewModel.getById(symposiumId) { symposium ->
+            symposium?.let {
+                binding.textViewTitle.text = it.title
+                binding.textViewDescription.text = it.description
+                binding.textViewDates.text = formatDateUseCase.execute(it.startDateTime)
+            }
         }
 
         // Configurar RecyclerView

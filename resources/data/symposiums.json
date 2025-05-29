@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "title": "Antropología Biológica 2025",
+    "description": "Avances recientes en la investigación de la antropología biológica.",
+    "startDateTime": "2025-04-22T09:00:00",
+    "talks": []
+  },
+  {
+    "id": 2,
+    "title": "Evolución Humana",
+    "description": "Exploración de temas clave relacionados con la evolución humana.Exploración de temas clave relacionados con la evolución humana.",
+    "startDateTime": "2025-04-23T10:00:00",
+    "talks": []
+  },
+  {
+    "id": 3,
+    "title": "Biodiversidad Humana",
+    "description": "Un análisis sobre la biodiversidad en los seres humanos.",
+    "startDateTime": "2025-04-23T14:00:00",
+    "talks": []
+  },
+  {
+    "id": 4,
+    "title": "Genómica y Adaptación Humana",
+    "description": "Exploración de cómo la genómica ha influido en la adaptación humana.",
+    "startDateTime": "2025-04-24T11:30:00",
+    "talks": []
+  },
+  {
+    "id": 5,
+    "title": "Paleontología y Comportamiento",
+    "description": "Discusión sobre el comportamiento humano a través de hallazgos paleontológicos.",
+    "startDateTime": "2025-04-25T13:00:00",
+    "talks": []
+  },
+  {
+    "id": 6,
+    "title": "Migraciones Humanas Antiguas",
+    "description": "Estudio de las migraciones humanas prehistóricas y su impacto genético.",
+    "startDateTime": "2025-04-25T18:30:00",
+    "talks": []
+  },
+  {
+    "id": 7,
+    "title": "Antropología Forense",
+    "description": "Avances en técnicas forenses para el estudio de restos humanos.",
+    "startDateTime": "2025-04-26T09:00:00",
+    "talks": []
+  }
+]

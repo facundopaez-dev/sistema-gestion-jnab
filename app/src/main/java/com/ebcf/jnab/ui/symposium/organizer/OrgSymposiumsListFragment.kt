@@ -7,8 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ebcf.jnab.data.repository.DefaultSymposiumRepository
+import com.ebcf.jnab.data.source.local.DatabaseProvider
+import com.ebcf.jnab.data.source.remote.FirebaseFirestoreProvider
+import com.ebcf.jnab.data.source.remote.FirestoreSymposiumDataSource
 import com.ebcf.jnab.databinding.FragmentOrgSymposiumsListBinding
 import com.ebcf.jnab.domain.usecase.FormatDateUseCase
 import com.ebcf.jnab.ui.symposium.SymposiumsListViewModel
@@ -24,8 +27,10 @@ class OrgSymposiumsListFragment : Fragment() {
     ): View {
         _binding = FragmentOrgSymposiumsListBinding.inflate(inflater, container, false)
 
-        // Crea el ViewModel sin Factory
-        val symposiumsListViewModel = ViewModelProvider(this)[SymposiumsListViewModel::class.java]
+        val dao = DatabaseProvider.getDatabase(requireContext()).symposiumDao()
+        val remoteDataSource = FirestoreSymposiumDataSource(FirebaseFirestoreProvider.provide())
+        val repository = DefaultSymposiumRepository(dao, remoteDataSource)
+        val symposiumsListViewModel = SymposiumsListViewModel(repository)
 
         // Crea una instancia del caso de uso
         val formatDateUseCase = FormatDateUseCase()
