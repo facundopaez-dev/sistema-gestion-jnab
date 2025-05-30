@@ -42,7 +42,10 @@ class SymposiumDetailFragment : Fragment() {
 
 
         // Crear el ViewModel sin Factory
-        val talksListViewModel = ViewModelProvider(this)[TalksListViewModel::class.java]
+        val talksListViewModel = ViewModelProvider(
+            requireActivity(),
+            TalksListViewModel.TalksListViewModelFactory(requireContext())
+        ).get(TalksListViewModel::class.java)
 
         val dao = DatabaseProvider.getDatabase(requireContext()).symposiumDao()
         val remoteDataSource = FirestoreSymposiumDataSource(FirebaseFirestoreProvider.provide())

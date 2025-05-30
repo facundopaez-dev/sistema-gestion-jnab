@@ -2,6 +2,7 @@ package com.ebcf.jnab.ui.talk.list
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,26 +32,27 @@ class TalksListFragment : Fragment() {
 
 
         //scope de activity para que el
-        talksListViewModel =
-            ViewModelProvider(requireActivity()).get(TalksListViewModel::class.java)
+        talksListViewModel = ViewModelProvider(
+            requireActivity(),
+            TalksListViewModel.TalksListViewModelFactory(requireContext())
+        ).get(TalksListViewModel::class.java)
+
 
         val recyclerView = binding.recyclerViewTalks
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        talksListViewModel.favoriteIds.observe(viewLifecycleOwner) { favoriteIds ->
-            val talks = talksListViewModel.talks.value ?: emptyList()
-            recyclerView.adapter = TalksListAdapter(talks, favoriteIds) { talkId ->
-                talksListViewModel.toggleFavorite(talkId)
-            }
+        adapter = TalksListAdapter(emptyList(), emptySet()) { talkId ->
+            Log.d("TalksListFragment", "toggleFavorite called with id: $talkId")
+            talksListViewModel.toggleFavorite(talkId)
         }
 
+        recyclerView.adapter = adapter
 
-        talksListViewModel.filteredTalks.observe(viewLifecycleOwner) { talks ->
-            val favoriteIds = talksListViewModel.favoriteIds.value ?: setOf()
-            recyclerView.adapter = TalksListAdapter(talks, favoriteIds) { talkId ->
-                talksListViewModel.toggleFavorite(talkId)
-            }
+        talksListViewModel.displayTalks.observe(viewLifecycleOwner) { (talks, favoriteIds) ->
+            adapter.updateTalks(talks)
+            adapter.updateFavorites(favoriteIds)
         }
+
 
         val myToolbar = binding.toolbar
 //        myToolbar.setNavigationIcon(R.drawable.baseline_keyboard_backspace_24)
