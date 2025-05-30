@@ -16,12 +16,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_agenda"
-        android:name="com.ebcf.jnab.ui.symposium.user.AllSymposiumsListFragment"
-        android:label="Agenda"
-        tools:layout="@layout/fragment_all_symposiums_list" />
-
-    <fragment
         android:id="@+id/navigation_talks"
         android:name="com.ebcf.jnab.ui.talk.list.TalksListFragment"
         android:label="Charlas"
@@ -88,4 +82,8 @@
         android:name="com.ebcf.jnab.ui.map.user.UserMapFragment"
         android:label="Mapa"
         tools:layout="@layout/fragment_map_organizer" />
+    <fragment
+        android:id="@+id/navigation_agenda"
+        android:name="com.ebcf.jnab.ui.talk.favourites.FavouriteTalksFragment"
+        android:label="FavouriteTalksFragment" />
 </navigation>
