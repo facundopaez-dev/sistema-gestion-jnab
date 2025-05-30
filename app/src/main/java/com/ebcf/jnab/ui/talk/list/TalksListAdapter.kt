@@ -46,6 +46,16 @@ class TalksListAdapter(
 
     override fun getItemCount(): Int = talks.size
 
+    fun updateTalks(newTalks: List<TalkModel>) {
+        this.talks = newTalks
+        notifyDataSetChanged()
+    }
+
+    fun updateFavorites(newFavorites: Set<Int>) {
+        this.favoriteIds = newFavorites
+        notifyDataSetChanged()
+    }
+
     fun updateData(newTalks: List<TalkModel>, newFavorites: Set<Int>) {
         talks = newTalks
         favoriteIds = newFavorites
