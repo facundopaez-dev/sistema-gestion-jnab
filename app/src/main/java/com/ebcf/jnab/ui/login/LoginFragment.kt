@@ -52,6 +52,10 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
         }
 
+        binding.forgotPasswordButton.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_passwordRecoveryFragment)
+        }
+
         return binding.root
     }
 
