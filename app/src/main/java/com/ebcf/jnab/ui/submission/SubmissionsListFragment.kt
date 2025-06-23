@@ -15,7 +15,11 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.launch
 import com.ebcf.jnab.R
 import com.ebcf.jnab.databinding.FragmentSubmissionsListBinding
 import com.ebcf.jnab.domain.usecase.FormatDateUseCase
@@ -32,21 +36,32 @@ class SubmissionsListFragment : Fragment() {
     ): View {
         _binding = FragmentSubmissionsListBinding.inflate(inflater, container, false)
 
-        // Crea el ViewModel sin Factory
+        // Crea el ViewModel
         val submissionListViewModel = ViewModelProvider(this)[SubmissionsListViewModel::class.java]
 
-        // Crea una instancia del caso de uso
+        // Caso de uso para formatear fecha
         val formatDateUseCase = FormatDateUseCase()
 
-        // Configura RecyclerView
+        // Configura el RecyclerView con layout manager y adapter inicial vacío
         val recyclerView = binding.recyclerViewSubmissions
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        // Observa el ViewModel para la lista de trabajos
-        submissionListViewModel.submissions.observe(viewLifecycleOwner) { submissions ->
-            // Se instancia el adaptador con la lista de trabajos
-            adapter = SubmissionsListAdapter(submissions, formatDateUseCase)
-            recyclerView.adapter = adapter
+        // Crea el adapter una sola vez, con callback para click
+        adapter = SubmissionsListAdapter(formatDateUseCase) { submission ->
+            val action = SubmissionsListFragmentDirections
+                .actionSubmissionsListFragmentToSubmissionDetailFragment(submission.id)
+            findNavController().navigate(action)
+        }
+
+        recyclerView.adapter = adapter
+
+        // Recolecta el flow para actualizar la lista en tiempo real
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                submissionListViewModel.submissionsFlow.collect { submissions ->
+                    adapter.setAllSubmissions(submissions)
+                }
+            }
         }
 
         return binding.root

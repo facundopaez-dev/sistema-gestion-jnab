@@ -29,6 +29,16 @@
     <string name="signup_button_register">Registrarse</string>
     <string name="signup_text_have_account">¿Tiene una cuenta? Inicie sesión</string>
     <string name="text_no_account_register">¿No tiene una cuenta? Regístrese</string>
+    <string name="text_forgot_password_link">Olvidé mi contraseña</string>
+    <string name="button_password_recovery">Restablecer contraseña</string>
+    <string name="text_back_to_login">Volver al inicio de sesión</string>
+    <string name="button_submission_approve">Aprobar</string>
+    <string name="button_submission_reject">Rechazar</string>
+    <string name="author">Autor</string>
+    <string name="description">Descripción</string>
+    <string name="submission_status">Estado</string>
+    <string name="submission_submitted_at">Fecha de envío</string>
+    <string name="rejection_reason">Motivo</string>
 
     <string-array name="marker_types">
         <item>Alojamiento</item>
