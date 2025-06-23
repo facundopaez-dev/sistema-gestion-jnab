@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ebcf.jnab.databinding.FragmentFavouriteTalksBinding
-import com.ebcf.jnab.ui.talk.list.TalksListAdapter
+import com.ebcf.jnab.ui.talk.list.GroupedTalksAdapter
 import com.ebcf.jnab.ui.talk.list.TalksListViewModel
 
 class FavouriteTalksFragment : Fragment() {
@@ -23,26 +23,25 @@ class FavouriteTalksFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFavouriteTalksBinding.inflate(inflater, container, false)
-        val root = binding.root
+        return binding.root
+    }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val viewModel = ViewModelProvider(
             requireActivity(), TalksListViewModel.TalksListViewModelFactory(requireContext())
-        ).get(TalksListViewModel::class.java)
+        )[TalksListViewModel::class.java]
 
         val recyclerView = binding.recyclerViewFavouriteTalks
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        val adapter = TalksListAdapter(emptyList(), emptySet()) { talkId ->
-            viewModel.toggleFavorite(talkId)
-        }
+        val adapter = GroupedTalksAdapter()
         recyclerView.adapter = adapter
 
-        viewModel.displayTalks.observe(viewLifecycleOwner) { (talks, favoriteIds) ->
-            val filtered = talks.filter { talk -> favoriteIds.contains(talk.id) }
-            adapter.updateData(filtered, favoriteIds)
+        viewModel.groupedFavorites.observe(viewLifecycleOwner) { grouped ->
+            adapter.submitGroupedTalks(grouped)
         }
 
-        return root
     }
 
     override fun onDestroyView() {
@@ -50,3 +49,4 @@ class FavouriteTalksFragment : Fragment() {
         _binding = null
     }
 }
+
