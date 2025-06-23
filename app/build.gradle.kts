@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.services)
-    id("androidx.navigation.safeargs")
+    alias(libs.plugins.androidx.navigation.safe.args.kotlin)
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
     kotlin("kapt")
 }

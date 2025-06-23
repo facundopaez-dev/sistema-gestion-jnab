@@ -14,7 +14,26 @@
         android:id="@+id/submissionsListFragment"
         android:name="com.ebcf.jnab.ui.submission.SubmissionsListFragment"
         android:label="fragment_submissions_list"
-        tools:layout="@layout/fragment_submissions_list" />
+        tools:layout="@layout/fragment_submissions_list">
+        <action
+            android:id="@+id/action_submissionsListFragment_to_submissionDetailFragment"
+            app:destination="@id/submissionDetailFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/submissionDetailFragment"
+        android:name="com.ebcf.jnab.ui.submission.detail.SubmissionDetailFragment"
+        android:label="SubmissionDetailFragment"
+        tools:layout="@layout/fragment_submission_detail">
+
+        <argument
+            android:name="submissionId"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/orgSymposiumsListFragment"
@@ -22,11 +41,9 @@
         android:label="fragment_org_symposiums_list"
         tools:layout="@layout/fragment_org_symposiums_list" />
 
-
     <fragment
         android:id="@+id/navigation_mapa_organizer"
         android:name="com.ebcf.jnab.ui.map.organizer.OrganizerMapFragment"
         android:label="Mapa"
         tools:layout="@layout/fragment_map_organizer" />
-
 </navigation>
