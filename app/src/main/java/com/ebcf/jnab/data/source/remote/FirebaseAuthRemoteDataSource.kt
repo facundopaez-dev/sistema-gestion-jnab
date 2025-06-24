@@ -7,6 +7,10 @@ class FirebaseAuthRemoteDataSource private constructor() {
 
     private val auth = FirebaseAuth.getInstance()
 
+    fun logout() {
+        auth.signOut()
+    }
+
     fun sendPasswordResetEmail(
         email: String,
         onSuccess: () -> Unit,

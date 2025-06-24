@@ -39,6 +39,9 @@
     <string name="submission_status">Estado</string>
     <string name="submission_submitted_at">Fecha de envío</string>
     <string name="rejection_reason">Motivo</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="drawer_open">Abrir menú</string>
+    <string name="drawer_close">Cerrar menú</string>
 
     <string-array name="marker_types">
         <item>Alojamiento</item>

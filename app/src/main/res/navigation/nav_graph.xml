@@ -53,10 +53,14 @@
         android:id="@+id/passwordRecoveryFragment"
         android:name="com.ebcf.jnab.ui.passwordRecovery.PasswordRecoveryFragment"
         android:label="PasswordRecoveryFragment"
-        tools:layout="@layout/fragment_password_recovery" >
+        tools:layout="@layout/fragment_password_recovery">
         <action
             android:id="@+id/action_passwordRecoveryFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
 
+    <!-- Accion global para navegar a la pantalla del login desde cualquier parte -->
+    <action
+        android:id="@+id/action_global_loginFragment"
+        app:destination="@id/loginFragment" />
 </navigation>

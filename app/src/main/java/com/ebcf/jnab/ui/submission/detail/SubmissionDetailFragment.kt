@@ -117,18 +117,24 @@ class SubmissionDetailFragment : Fragment() {
     private fun approve() {
         viewModel.approve(args.submissionId)
 
-        Snackbar.make(binding.root, "Trabajo aprobado", Snackbar.LENGTH_LONG)
+        currentSnackbar = Snackbar.make(binding.root, "Trabajo aprobado", Snackbar.LENGTH_LONG)
             .setAction("Deshacer") {
                 viewModel.undoApprove(args.submissionId)
             }
             .addCallback(object : Snackbar.Callback() {
                 override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-                    if (event != DISMISS_EVENT_ACTION) {
+                    // Valida que el fragmento sigue asociado antes de navegar
+                    if (event != DISMISS_EVENT_ACTION &&
+                        isAdded &&
+                        view != null &&
+                        parentFragmentManager.findFragmentById(id) != null
+                    ) {
                         findNavController().navigateUp()
                     }
                 }
             })
-            .show()
+
+        currentSnackbar?.show()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
