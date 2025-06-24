@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/navigation_symposiums"
-        android:title="@string/title_symposiums"
-        android:icon="@drawable/baseline_library_books_24"/>
+<!--    <item-->
+<!--        android:id="@+id/navigation_symposiums"-->
+<!--        android:title="@string/title_symposiums"-->
+<!--        android:icon="@drawable/baseline_library_books_24"/>-->
 
     <item
         android:id="@+id/navigation_talks"
@@ -25,5 +25,10 @@
         android:id="@+id/navigation_mapa_user"
         android:title="Mapa"
         android:icon="@drawable/icons8_google_maps" />
+
+    <item
+        android:id="@+id/navigation_inscription"
+        android:title="@string/title_speakers"
+        android:icon="@drawable/baseline_emoji_people_24"/>
 
 </menu>
