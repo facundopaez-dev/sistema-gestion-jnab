@@ -28,7 +28,7 @@
 
     <item
         android:id="@+id/navigation_inscription"
-        android:title="@string/title_speakers"
-        android:icon="@drawable/baseline_emoji_people_24"/>
+        android:title="Inscripción"
+        android:icon="@drawable/baseline_login_24"/>
 
 </menu>
