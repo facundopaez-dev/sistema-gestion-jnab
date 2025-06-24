@@ -95,6 +95,21 @@ class TalkRepository {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun getAll(id: Number): List<TalkModel> {
-        return hardcodedTalks
+        val now = LocalTime.now()
+        val today = LocalDate.now()
+
+        val testTalk = TalkModel(
+            id = 999,
+            symposiumId = 1,
+            title = "Simulación de charla para probar la notificación",
+            description = "",
+            speakerId = 1,
+            date = today,
+            startTime = now.plusHours(1).withSecond(0).withNano(0),
+            endTime = now.plusHours(2).withSecond(0).withNano(0)
+        )
+
+        return listOf(testTalk) + hardcodedTalks
     }
+
 }

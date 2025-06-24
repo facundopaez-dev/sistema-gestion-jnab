@@ -1,6 +1,9 @@
 package com.ebcf.jnab.ui.talk.list
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
@@ -10,9 +13,11 @@ import com.ebcf.jnab.data.repository.FavouriteRepository
 import com.ebcf.jnab.data.repository.TalkRepository
 import com.ebcf.jnab.data.source.local.AppDatabase
 import com.ebcf.jnab.domain.model.TalkModel
+import com.ebcf.jnab.ui.notification.AlarmReceiver
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalTime
+import java.time.ZoneId
 
 @RequiresApi(Build.VERSION_CODES.O)
 class TalksListViewModel(private val context: Context) : ViewModel() {
@@ -48,14 +53,13 @@ class TalksListViewModel(private val context: Context) : ViewModel() {
             displayTalks.value = Pair(_filteredTalks.value ?: emptyList(), it)
             updateGroupedFavoritesIfReady()
         }
-
     }
 
     private fun loadFavourites() {
         viewModelScope.launch {
             val favorites = favouriteRepository.getAllFavourites()
             _favoriteIds.value = favorites.map { it.talkId }.toSet()
-            updateGroupedFavoritesIfReady() // <- Ahora sí: se ejecuta cuando ya tenés los datos
+            updateGroupedFavoritesIfReady()
         }
     }
     @RequiresApi(Build.VERSION_CODES.O)
@@ -74,8 +78,13 @@ class TalksListViewModel(private val context: Context) : ViewModel() {
 
                 if (isFavorite) {
                     favouriteRepository.removeFromFavourites(FavouriteEntity(talkId))
+                    cancelNotification(talkId)
                 } else {
                     favouriteRepository.addToFavourites(FavouriteEntity(talkId))
+                    val talk = allTalks.find { it.id == talkId }
+                    if (talk != null) {
+                        scheduleNotificationForTalk(talk)
+                    }
                 }
 
                 val updatedFavorites = favouriteRepository.getAllFavourites()
@@ -116,6 +125,62 @@ class TalksListViewModel(private val context: Context) : ViewModel() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun scheduleNotificationForTalk(talk: TalkModel) {
+        val context = this.context
+
+        val triggerDateTime = talk.date
+            .atTime(talk.startTime)
+            .minusHours(1)
+
+        val triggerTimeMillis = triggerDateTime
+            .atZone(ZoneId.systemDefault())
+            .toInstant()
+            .toEpochMilli()
+
+        // Verifica si la charla ya pasó
+        val triggerDateTime2 = talk.date
+            .atTime(talk.startTime)
+
+        val triggerTimeMillis2 = triggerDateTime2
+            .atZone(ZoneId.systemDefault())
+            .toInstant()
+            .toEpochMilli()
+
+        val now = System.currentTimeMillis()
+        if (triggerTimeMillis2 <= now) {
+            return
+        }
+
+        val intent = Intent(context, AlarmReceiver::class.java).apply {
+            putExtra("title", talk.title)
+            putExtra("id", talk.id)
+        }
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            context,
+            talk.id,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerTimeMillis, pendingIntent)
+    }
+
+
+    fun cancelNotification(talkId: Int) {
+        val intent = Intent(context, AlarmReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(
+            context,
+            talkId,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.cancel(pendingIntent)
+    }
+
     class TalksListViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(TalksListViewModel::class.java)) {
@@ -132,4 +197,3 @@ data class GroupedTalks(
     val date: LocalDate,
     val talks: List<TalkModel>
 )
-
