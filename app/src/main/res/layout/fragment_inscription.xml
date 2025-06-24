@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+        <!-- Texto que muestra el nombre del PDF seleccionado -->
+
+        <TextView
+            android:id="@+id/tvEstadoComprobante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:capitalize="characters"
+            android:text="Estado: cargando..."
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnSubirComprobante" />
+
+        <TextView
+            android:id="@+id/tvPdfNombre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Ningún archivo seleccionado"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Botón para seleccionar un PDF -->
+        <Button
+            android:id="@+id/btnSeleccionarPdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seleccionar PDF"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPdfNombre"
+            android:layout_marginTop="24dp"
+            />
+
+        <!-- Botón para subir el comprobante -->
+        <Button
+            android:id="@+id/btnSubirComprobante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subir comprobante"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPdfNombre"
+            android:layout_marginTop="24dp"
+            />
+
+        <!-- ProgressBar para indicar subida -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/btnSeleccionarPdf"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp"
+            />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

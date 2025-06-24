@@ -13,4 +13,9 @@
         android:id="@+id/navigation_mapa_organizer"
         android:title="Mapa"
         android:icon="@drawable/icons8_google_maps" />
+
+    <item
+        android:id="@+id/navigation_inscripciones_admin"
+        android:icon="@drawable/baseline_library_books_24"
+        android:title="Incripciones" />
 </menu>

@@ -19,5 +19,5 @@ class AllSymposiumsListViewModel : ViewModel() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     val symposiums: LiveData<List<SymposiumModel>> = _symposiums
-
+//
 }

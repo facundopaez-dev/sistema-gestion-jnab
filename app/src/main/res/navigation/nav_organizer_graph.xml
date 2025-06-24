@@ -46,4 +46,8 @@
         android:name="com.ebcf.jnab.ui.map.organizer.OrganizerMapFragment"
         android:label="Mapa"
         tools:layout="@layout/fragment_map_organizer" />
+    <fragment
+        android:id="@+id/navigation_inscripciones_admin"
+        android:name="com.ebcf.jnab.ui.inscription.AdminInscripcionesFragment"
+        android:label="AdminInscripcionesFragment" />
 </navigation>

@@ -29,6 +29,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -43,6 +44,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.firebase.storage.ktx)
     val nav_version = "2.8.9"
 
     // Jetpack Compose integration
@@ -76,7 +78,8 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-
+    implementation("com.google.firebase:firebase-appcheck-playintegrity")
+    implementation("com.google.firebase:firebase-appcheck-debug") // For debug builds only
     //mapa
     implementation("com.google.android.gms:play-services-maps:19.0.0")
     implementation("com.google.android.libraries.places:places:3.4.0")
