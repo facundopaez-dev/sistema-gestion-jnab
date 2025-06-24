@@ -7,7 +7,8 @@ import com.ebcf.jnab.domain.model.InscripcionItem
 
 class AdminInscripcionesAdapter(
     private val onAprobar: (InscripcionItem) -> Unit,
-    private val onRechazar: (InscripcionItem) -> Unit
+    private val onRechazar: (InscripcionItem) -> Unit,
+    private val onVerComprobante: (String) -> Unit,  // recibe el base64
 ) : RecyclerView.Adapter<AdminInscripcionesAdapter.InscripcionViewHolder>() {
 
     private val items = mutableListOf<InscripcionItem>()
@@ -25,6 +26,7 @@ class AdminInscripcionesAdapter(
 
     override fun onBindViewHolder(holder: InscripcionViewHolder, position: Int) {
         holder.bind(items[position])
+
     }
 
     override fun getItemCount() = items.size
@@ -44,8 +46,9 @@ class AdminInscripcionesAdapter(
                 onRechazar(item)
             }
 
-            // Opcional: mostrar comprobante (ej: base64 en TextView o PDF viewer)
-            // Si querés mostrar/ocultar detalles con expanded, usá binding y item.expanded
+            binding.btnVerComprobante.setOnClickListener {
+                onVerComprobante(item.comprobanteBase64)
+            }
         }
     }
 }

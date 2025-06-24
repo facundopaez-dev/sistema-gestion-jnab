@@ -17,5 +17,5 @@
     <item
         android:id="@+id/navigation_inscripciones_admin"
         android:icon="@drawable/baseline_library_books_24"
-        android:title="Incripciones" />
+        android:title="Inscripciones" />
 </menu>
