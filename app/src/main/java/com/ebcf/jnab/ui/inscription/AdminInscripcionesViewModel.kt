@@ -1,16 +1,20 @@
 package com.ebcf.jnab.ui.inscription
 
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ebcf.jnab.data.source.remote.FirebaseFirestoreProvider
 import com.ebcf.jnab.domain.model.InscripcionItem
+import com.ebcf.jnab.domain.usecase.FormatDateUseCase
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.time.ZoneId
 
 data class Inscripcion(
     val userId: String = "",
@@ -35,6 +39,7 @@ class AdminInscripcionesViewModel : ViewModel() {
         _error.value = null
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun cargarInscripciones() {
         viewModelScope.launch {
             _isLoading.value = true
@@ -44,12 +49,25 @@ class AdminInscripcionesViewModel : ViewModel() {
                     val userId = doc.getString("userId") ?: return@mapNotNull null
                     val estado = doc.getString("estado") ?: "pendiente"
                     val fecha = doc.getTimestamp("fechaRegistro")?.toDate()?.toString()
+                    val timestamp = doc.getTimestamp("fechaRegistro")?.toDate()
+                    val localDateTime = timestamp?.toInstant()?.atZone(ZoneId.systemDefault())?.toLocalDateTime()
+                    val formatter = FormatDateUseCase()
+                    val fechaFormateada = localDateTime?.let { formatter.execute(it) }
+
+
                     val base64 = doc.getString("comprobanteBase64") ?: return@mapNotNull null
+
+
+                    val userDoc = firestore.collection("users").document(userId).get().await()
+                    val nombre = userDoc.getString("firstName") ?: "Sin nombre"
+                    val apellido = userDoc.getString("lastName") ?: "Sin apellido"
+                    val nombreCompleto = "$nombre $apellido"
 
                     InscripcionItem(
                         userId = userId,
+                        nombreCompleto = nombreCompleto,
                         estado = estado,
-                        fechaRegistro = fecha,
+                        fechaRegistro = fechaFormateada,
                         comprobanteBase64 = base64
                     )
                 }

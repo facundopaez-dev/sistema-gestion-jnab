@@ -1,3 +1,4 @@
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,9 +35,18 @@ class AdminInscripcionesAdapter(
     inner class InscripcionViewHolder(private val binding: ItemInscripcionBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: InscripcionItem) {
-            binding.tvUserId.text = item.userId
+            binding.tvUserId.text = item.nombreCompleto
             binding.tvEstado.text = item.estado
             binding.tvFecha.text = item.fechaRegistro ?: "Sin fecha"
+
+            val color = when (item.estado.lowercase()) {
+                "aprobado" -> Color.parseColor("#4CAF50")
+                "rechazado" -> Color.parseColor("#F44336")
+                "pendiente" -> Color.parseColor("#FFC107")
+                else -> Color.BLACK
+            }
+
+            binding.tvEstado.setTextColor(color)
 
             binding.btnAprobar.setOnClickListener {
                 onAprobar(item)
