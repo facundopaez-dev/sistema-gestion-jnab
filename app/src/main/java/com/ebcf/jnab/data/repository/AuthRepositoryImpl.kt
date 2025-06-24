@@ -7,6 +7,10 @@ class AuthRepositoryImpl(
     private val remoteDataSource: FirebaseAuthRemoteDataSource
 ) : AuthRepository {
 
+    override fun logout() {
+        remoteDataSource.logout()
+    }
+
     override fun sendPasswordResetEmail(
         email: String, onSuccess: () -> Unit, onError: (Exception) -> Unit
     ) {
