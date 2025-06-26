@@ -12,7 +12,7 @@ import com.ebcf.jnab.domain.repository.SymposiumRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class DefaultSymposiumRepository(
+class SymposiumRepositoryImpl(
     private val dao: SymposiumDao,
     private val remoteDataSource: FirestoreSymposiumDataSource
 ) : SymposiumRepository {
@@ -46,7 +46,10 @@ class DefaultSymposiumRepository(
     override suspend fun syncFromRemote() {
         withContext(Dispatchers.IO) {
             val remoteSymposiums = remoteDataSource.getAllSymposiums()
-            Log.d("DefaultSymposiumRepository", "Simbolos obtenidos de Firestore: ${remoteSymposiums.size}")
+            Log.d(
+                "DefaultSymposiumRepository",
+                "Simbolos obtenidos de Firestore: ${remoteSymposiums.size}"
+            )
 
             val insertedIds = dao.insertAll(remoteSymposiums.map { it.toEntity() })
             Log.d("DefaultSymposiumRepository", "Simbolos insertados en Room: ${insertedIds.size}")

@@ -12,7 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.ebcf.jnab.R
-import com.ebcf.jnab.data.repository.DefaultSymposiumRepository
+import com.ebcf.jnab.data.repository.SymposiumRepositoryImpl
 import com.ebcf.jnab.data.source.local.DatabaseProvider
 import com.ebcf.jnab.data.source.remote.FirebaseFirestoreProvider
 import com.ebcf.jnab.data.source.remote.FirestoreSymposiumDataSource
@@ -53,7 +53,7 @@ class TalksFilterBottomSheet : BottomSheetDialogFragment() {
 
         val dao = DatabaseProvider.getDatabase(requireContext()).symposiumDao()
         val remoteDataSource = FirestoreSymposiumDataSource(FirebaseFirestoreProvider.provide())
-        val repository = DefaultSymposiumRepository(dao, remoteDataSource)
+        val repository = SymposiumRepositoryImpl(dao, remoteDataSource)
         symposiumsViewModel = SymposiumsListViewModel(repository)
         //
 

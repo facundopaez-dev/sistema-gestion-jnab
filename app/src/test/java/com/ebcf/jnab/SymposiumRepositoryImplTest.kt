@@ -1,7 +1,7 @@
 package com.ebcf.jnab
 
 import com.ebcf.jnab.data.model.SymposiumEntity
-import com.ebcf.jnab.data.repository.DefaultSymposiumRepository
+import com.ebcf.jnab.data.repository.SymposiumRepositoryImpl
 import com.ebcf.jnab.data.source.local.dao.SymposiumDao
 import com.ebcf.jnab.data.source.local.mapper.toModel
 import com.ebcf.jnab.data.source.local.mapper.toEntity
@@ -23,11 +23,11 @@ import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class DefaultSymposiumRepositoryTest {
+class SymposiumRepositoryImplTest {
 
     private val dao = mockk<SymposiumDao>(relaxed = true)
     private val remoteDataSource = mockk<FirestoreSymposiumDataSource>(relaxed = true)
-    private lateinit var repository: DefaultSymposiumRepository
+    private lateinit var repository: SymposiumRepositoryImpl
 
     private val testDispatcher = StandardTestDispatcher()
 
@@ -44,7 +44,7 @@ class DefaultSymposiumRepositoryTest {
     @Before
     fun setup() {
         Dispatchers.setMain(testDispatcher)
-        repository = DefaultSymposiumRepository(dao, remoteDataSource)
+        repository = SymposiumRepositoryImpl(dao, remoteDataSource)
     }
 
     @After
