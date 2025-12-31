@@ -3,5 +3,4 @@
     <!-- Android automaticamente usa el archivo correcto segun el tema activo: -->
     <!-- - Si el tema activo es el oscuro, usara los colores definidos en colors.xml de res/values-night -->
     <!-- - Si el tema activo es el claro, usara los colores definidos en colors.xml de res/values -->
-    <color name="submission_status_pending">#757575</color>
 </resources>

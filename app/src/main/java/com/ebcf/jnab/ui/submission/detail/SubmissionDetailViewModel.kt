@@ -29,9 +29,9 @@ class SubmissionDetailViewModel(private val repository: SubmissionRepository) : 
 
     fun updateStatusColor(status: SubmissionStatus) {
         _statusColorRes.value = when (status) {
-            SubmissionStatus.APPROVED -> R.color.submission_status_approved
-            SubmissionStatus.REJECTED -> R.color.submission_status_rejected
-            SubmissionStatus.PENDING -> R.color.submission_status_pending
+            SubmissionStatus.APPROVED -> R.color.approved_status
+            SubmissionStatus.REJECTED -> R.color.rejected_status
+            SubmissionStatus.PENDING -> R.color.pending_status
         }
     }
 
