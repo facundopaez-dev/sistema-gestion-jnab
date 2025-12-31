@@ -83,7 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:textColor="@color/submission_status_pending"
+                android:textColor="@color/pending_status"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 tools:text="Pendiente" />
@@ -137,7 +137,7 @@
                     android:id="@+id/buttonApprove"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/submission_status_approved"
+                    android:backgroundTint="@color/approved_status"
                     android:text="@string/button_submission_approve"
                     android:textColor="#FFFFFF"
                     tools:ignore="TextContrastCheck" />
@@ -147,7 +147,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:backgroundTint="@color/submission_status_rejected"
+                    android:backgroundTint="@color/rejected_status"
                     android:text="@string/button_submission_reject"
                     android:textColor="#FFFFFF"
                     tools:ignore="TextContrastCheck" />
