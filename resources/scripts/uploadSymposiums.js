@@ -1,8 +1,14 @@
 const admin = require("firebase-admin");
 const fs = require("fs");
+const path = require("path");
 
-const serviceAccount = require("../../serviceAccountKey.json");
-const symposiums = JSON.parse(fs.readFileSync("symposiums.json", "utf8"));
+// service account (raíz del proyecto)
+const serviceAccountPath = path.resolve(__dirname, "../../serviceAccountKey.json");
+const serviceAccount = require(serviceAccountPath);
+
+// archivo JSON de symposiums
+const symposiumsPath = path.resolve(__dirname, "../data/symposiums.json");
+const symposiums = JSON.parse(fs.readFileSync(symposiumsPath, "utf8"));
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
@@ -20,7 +26,9 @@ async function uploadSymposiums() {
       console.error(`❌ Error al subir ${symposium.title}:`, error);
     }
   }
+  
   console.log("✅ Carga completada.");
+  process.exit(0);
 }
 
 uploadSymposiums();
