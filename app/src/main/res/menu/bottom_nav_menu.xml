@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-<!--    <item-->
-<!--        android:id="@+id/navigation_symposiums"-->
-<!--        android:title="@string/title_symposiums"-->
-<!--        android:icon="@drawable/baseline_library_books_24"/>-->
+    <!--    <item-->
+    <!--        android:id="@+id/navigation_symposiums"-->
+    <!--        android:title="@string/title_symposiums"-->
+    <!--        android:icon="@drawable/baseline_library_books_24"/>-->
 
     <item
         android:id="@+id/navigation_talks"
-        android:title="@string/title_talks"
-        android:icon="@drawable/assignment_24dp_000000_fill0_wght400_grad0_opsz24"/>
+        android:icon="@drawable/assignment_24dp_000000_fill0_wght400_grad0_opsz24"
+        android:title="@string/title_talks" />
 
     <item
         android:id="@+id/navigation_agenda"
-        android:title="@string/title_agenda"
-        android:icon="@drawable/baseline_bookmark_24"/>
+        android:icon="@drawable/baseline_bookmark_24"
+        android:title="@string/title_agenda" />
 
     <item
         android:id="@+id/navigation_speakers"
-        android:title="@string/title_speakers"
-        android:icon="@drawable/baseline_emoji_people_24"/>
+        android:icon="@drawable/baseline_emoji_people_24"
+        android:title="@string/title_speakers" />
 
     <item
         android:id="@+id/navigation_mapa_user"
-        android:title="Mapa"
-        android:icon="@drawable/icons8_google_maps" />
+        android:icon="@drawable/icons8_google_maps"
+        android:title="Mapa" />
 
     <item
         android:id="@+id/navigation_inscription"
-        android:title="Inscripción"
-        android:icon="@drawable/baseline_login_24"/>
+        android:icon="@drawable/baseline_login_24"
+        android:title="Inscripción" />
 
 </menu>
