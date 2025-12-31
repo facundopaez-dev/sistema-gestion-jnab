@@ -86,7 +86,8 @@
     <fragment
         android:id="@+id/navigation_agenda"
         android:name="com.ebcf.jnab.ui.talk.favourites.FavouriteTalksFragment"
-        android:label="FavouriteTalksFragment" />
+        android:label="FavouriteTalksFragment"
+        tools:layout="@layout/fragment_favourite_talks" />
 
     <fragment
         android:id="@+id/navigation_inscription"
