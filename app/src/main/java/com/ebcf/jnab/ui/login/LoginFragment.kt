@@ -12,28 +12,39 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.ebcf.jnab.R
 import com.ebcf.jnab.databinding.FragmentLoginBinding
+import com.ebcf.jnab.domain.model.AuthError
 import com.ebcf.jnab.util.FieldValidator
 import com.ebcf.jnab.util.ERROR_INVALID_PASSWORD
 import com.ebcf.jnab.util.ERROR_INVALID_EMAIL
 import com.ebcf.jnab.util.MIN_PASSWORD_LENGTH
 
+private const val INVALID_CREDENTIALS = "Correo electrónico o contraseña incorrectos"
+private const val ERROR_GENERIC = "Error al iniciar sesión. Por favor, inténtelo más tarde."
+
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+
     private lateinit var viewModel: LoginViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         viewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
 
         setupFocusListeners()
         setupClearErrorOnTextChange()
 
-        // Configura el click del boton de inicio de sesion
         binding.loginButton.setOnClickListener {
             val email = binding.emailAddressField.text.toString().trim()
             val password = binding.passwordField.text.toString().trim()
@@ -41,22 +52,32 @@ class LoginFragment : Fragment() {
             if (validateAllFields()) {
                 viewModel.login(email, password)
             }
-
-        }
-
-        viewModel.loginError.observe(viewLifecycleOwner) { errorMessage ->
-            Snackbar.make(requireView(), errorMessage, Snackbar.LENGTH_LONG).show()
         }
 
         binding.signupButton.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
+            findNavController()
+                .navigate(R.id.action_loginFragment_to_signupFragment)
         }
 
         binding.forgotPasswordButton.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_passwordRecoveryFragment)
+            findNavController()
+                .navigate(R.id.action_loginFragment_to_passwordRecoveryFragment)
         }
 
-        return binding.root
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+        viewModel.loginError.observe(viewLifecycleOwner) { error ->
+            val message = when (error) {
+                AuthError.InvalidCredentials -> INVALID_CREDENTIALS
+                AuthError.GenericError -> ERROR_GENERIC
+            }
+
+            Snackbar
+                .make(requireView(), message, Snackbar.LENGTH_LONG)
+                .show()
+        }
     }
 
     override fun onDestroyView() {
