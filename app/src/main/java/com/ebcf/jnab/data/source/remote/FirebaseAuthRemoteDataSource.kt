@@ -5,7 +5,7 @@ import android.util.Log
 
 class FirebaseAuthRemoteDataSource private constructor() {
 
-    private val auth = FirebaseAuth.getInstance()
+    val auth = FirebaseAuth.getInstance()
 
     fun logout() {
         auth.signOut()
