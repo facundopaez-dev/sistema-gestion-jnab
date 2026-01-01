@@ -1,7 +1,6 @@
 package com.ebcf.jnab.ui.signup
 
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +8,11 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import com.google.firebase.firestore.FirebaseFirestore
 import com.ebcf.jnab.R
-import com.ebcf.jnab.domain.model.UserRole
+import com.ebcf.jnab.data.repository.SignupRepositoryImpl
 import com.ebcf.jnab.databinding.FragmentSignupBinding
 import com.ebcf.jnab.util.FieldValidator
 import com.ebcf.jnab.util.ERROR_INVALID_PASSWORD
@@ -32,6 +29,10 @@ class SignupFragment : Fragment() {
     private var _binding: FragmentSignupBinding? = null
     private val binding get() = _binding!!
 
+    private val viewModel: SignupViewModel by viewModels {
+        SignupViewModelFactory(SignupRepositoryImpl())
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -39,84 +40,48 @@ class SignupFragment : Fragment() {
 
         setupFocusListeners()
         setupClearErrorOnTextChange()
+        setupClickListeners()
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observeViewModel()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    // -------------------------------
+    // Observers
+    // -------------------------------
+    private fun observeViewModel() {
+        viewModel.signupState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is SignupState.Loading -> binding.signupButton.isEnabled = false
+                is SignupState.Result -> {
+                    binding.signupButton.isEnabled = true
+                    showMessage(state.message)
+                }
+            }
+        }
+    }
+
+    // -------------------------------
+    // Click listeners
+    // -------------------------------
+    private fun setupClickListeners() {
         binding.signupButton.setOnClickListener {
             if (validateAllFields()) {
-                val email = binding.etEmail.text.toString().trim()
-                val password = binding.etPassword.text.toString().trim()
-                val firstName = binding.etFirstName.text.toString().trim()
-                val lastName = binding.etLastName.text.toString().trim()
-
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            val firestore = FirebaseFirestore.getInstance()
-                            val user = task.result?.user
-                            val uid = user?.uid
-
-                            // Estos datos son persistidos en Firestore Database
-                            val userData = hashMapOf(
-                                "firstName" to firstName,
-                                "lastName" to lastName,
-                                "email" to email,
-                                "role" to UserRole.ASSISTANT.value
-                            )
-
-                            if (uid != null) {
-                                firestore.collection("users").document(uid).set(userData)
-                                    .addOnSuccessListener {
-                                        user.sendEmailVerification()
-                                            .addOnCompleteListener { emailTask ->
-                                                if (emailTask.isSuccessful) {
-                                                    Snackbar.make(
-                                                        binding.root,
-                                                        "Registro exitoso. Revise su correo para verificar su cuenta.",
-                                                        Snackbar.LENGTH_LONG
-                                                    ).show()
-
-                                                    // Redirige al usuario hacia el login
-                                                    findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
-                                                } else {
-                                                    Log.e(
-                                                        "SignupFragment",
-                                                        "Error al enviar correo de verificación",
-                                                        emailTask.exception
-                                                    )
-                                                    Snackbar.make(
-                                                        binding.root,
-                                                        "Error al enviar correo de verificación.",
-                                                        Snackbar.LENGTH_LONG
-                                                    ).show()
-                                                }
-                                            }
-                                    }.addOnFailureListener { e ->
-                                        Log.e(
-                                            "Signup",
-                                            "Error al guardar datos en Firestore Database",
-                                            e
-                                        )
-                                        Snackbar.make(
-                                            binding.root,
-                                            "Error al registrar usuario. Por favor, intenta nuevamente.",
-                                            Snackbar.LENGTH_LONG
-                                        ).show()
-                                    }
-                            }
-
-                        } else {
-                            val exception = task.exception
-                            if (exception is FirebaseAuthUserCollisionException) {
-                                binding.tilEmail.error = "Correo electrónico ya registrado"
-                            } else {
-                                Log.e("Signup", "Error al registrar usuario", exception)
-                                Snackbar.make(
-                                    binding.root,
-                                    "Error al registrar usuario. Por favor, intenta nuevamente.",
-                                    Snackbar.LENGTH_LONG
-                                ).show()
-                            }
-                        }
-                    }
+                viewModel.signup(
+                    email = binding.etEmail.text.toString().trim(),
+                    password = binding.etPassword.text.toString().trim(),
+                    firstName = binding.etFirstName.text.toString().trim(),
+                    lastName = binding.etLastName.text.toString().trim()
+                )
             }
         }
 
@@ -128,35 +93,57 @@ class SignupFragment : Fragment() {
             val confirmPassword = binding.etConfirmPassword.text.toString()
 
             val anyFieldNotEmpty =
-                firstName.isNotEmpty() || lastName.isNotEmpty() || email.isNotEmpty() || password.isNotEmpty() || confirmPassword.isNotEmpty()
+                firstName.isNotEmpty() || lastName.isNotEmpty() || email.isNotEmpty() ||
+                        password.isNotEmpty() || confirmPassword.isNotEmpty()
 
             if (anyFieldNotEmpty) {
-                AlertDialog.Builder(requireContext()).setTitle("¿Desea salir del registro?")
+                AlertDialog.Builder(requireContext())
+                    .setTitle("¿Desea salir del registro?")
                     .setMessage("Se perderán los datos ingresados. ¿Está seguro de que desea salir?")
                     .setPositiveButton("Sí") { _, _ ->
                         findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
-                    }.setNegativeButton("No", null).show()
+                    }
+                    .setNegativeButton("No", null)
+                    .show()
             } else {
                 findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
             }
         }
-
-        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    // -------------------------------
+    // Mensajes
+    // -------------------------------
+    private fun showMessage(message: SignupMessage) {
+        when (message) {
+            SignupMessage.SignupSuccess -> {
+                Snackbar.make(
+                    binding.root,
+                    "Registro exitoso. Revise su correo para verificar su cuenta.",
+                    Snackbar.LENGTH_LONG
+                ).show()
+
+                findNavController()
+                    .navigate(R.id.action_signupFragment_to_loginFragment)
+            }
+
+            SignupMessage.SignupError -> {
+                Snackbar.make(
+                    binding.root,
+                    "Error al registrar usuario. Por favor, intenta nuevamente.",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+
+            SignupMessage.EmailAlreadyRegistered -> {
+                binding.tilEmail.error = "Correo electrónico ya registrado"
+            }
+        }
     }
 
-    /**
-     * Valida todos los campos del formulario de registro.
-     *
-     * Esta funcion verifica que cada campo cumpla con sus criterios de validacion específicos,
-     * mostrando mensajes de error correspondientes en los TextInputLayout asociados.
-     *
-     * @return `true` si todos los campos son validos, `false` si alguno no cumple la validacion.
-     */
+    // -------------------------------
+    // Validaciones
+    // -------------------------------
     private fun validateAllFields(): Boolean {
         val firstName = binding.etFirstName.text.toString().trim()
         val lastName = binding.etLastName.text.toString().trim()
@@ -187,16 +174,9 @@ class SignupFragment : Fragment() {
         return isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid && isConfirmPasswordValid
     }
 
-    /**
-     * Configura listeners para los cambios de foco en los campos de entrada.
-     *
-     * Cada vez que un campo pierde el foco (cuando el usuario termina de editarlo),
-     * se valida el contenido actual y, si es invalido, se muestra un mensaje de error
-     * en el `TextInputLayout` correspondiente.
-     *
-     * Esto permite una validacion en tiempo real que guía al usuario mientras completa
-     * el formulario.
-     */
+    // -------------------------------
+    // Listeners de foco
+    // -------------------------------
     private fun setupFocusListeners() {
         binding.etFirstName.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
@@ -251,14 +231,9 @@ class SignupFragment : Fragment() {
         }
     }
 
-    /**
-     * Configura listeners para que, cuando el usuario modifique el texto en cualquiera
-     * de los campos de entrada, se borre el mensaje de error correspondiente en el
-     * `TextInputLayout` asociado.
-     *
-     * Esto mejora la experiencia de usuario al eliminar los errores visibles en cuanto
-     * el usuario comienza a corregir el campo.
-     */
+    // -------------------------------
+    // Borrar errores al escribir
+    // -------------------------------
     private fun setupClearErrorOnTextChange() {
         binding.etFirstName.addTextChangedListener {
             binding.tilFirstName.error = null
@@ -304,9 +279,8 @@ class SignupFragment : Fragment() {
                     binding.tilConfirmPassword.error = ERROR_INVALID_CONFIRM_PASSWORD
                 }
             } else {
-                binding.tilConfirmPassword.error = null // Si esta vacio, no muestra el error
+                binding.tilConfirmPassword.error = null
             }
         }
     }
-
 }
