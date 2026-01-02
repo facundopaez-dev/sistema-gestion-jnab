@@ -45,9 +45,9 @@ class MainActivity : AppCompatActivity() {
             sessionViewModel.logout()
         }
 
-        loginViewModel.loginSuccess.observe(this, Observer { role ->
-            navigateBasedOnRole(role)
-        })
+        loginViewModel.loginSuccess.observe(this) { user ->
+            navigateBasedOnRole(user.role)
+        }
 
         sessionViewModel.logoutEvent.observe(this) {
             // setPopUpTo(R.id.nav_graph, true) significa:
