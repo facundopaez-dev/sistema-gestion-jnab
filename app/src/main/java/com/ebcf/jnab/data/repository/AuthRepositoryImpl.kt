@@ -4,6 +4,8 @@ import com.ebcf.jnab.data.source.remote.FirebaseAuthRemoteDataSource
 import com.ebcf.jnab.data.source.remote.FirebaseFirestoreProvider
 import com.ebcf.jnab.domain.model.AuthError
 import com.ebcf.jnab.domain.repository.AuthRepository
+import com.ebcf.jnab.data.common.USERS
+import com.ebcf.jnab.data.common.ROLE
 
 class AuthRepositoryImpl(
     private val remoteDataSource: FirebaseAuthRemoteDataSource
@@ -28,12 +30,12 @@ class AuthRepositoryImpl(
                     return@addOnCompleteListener
                 }
 
-                FirebaseFirestoreProvider.provide().collection("users")
+                FirebaseFirestoreProvider.provide().collection(USERS)
                     .document(user.uid)
                     .get()
                     .addOnSuccessListener { doc ->
-                        if (doc.getString("role") != null) {
-                            onSuccess(doc.getString("role")!!)
+                        if (doc.getString(ROLE) != null) {
+                            onSuccess(doc.getString(ROLE)!!)
                         } else {
                             onError(AuthError.GenericError)
                         }
