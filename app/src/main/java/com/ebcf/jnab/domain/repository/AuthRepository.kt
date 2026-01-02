@@ -1,14 +1,13 @@
 package com.ebcf.jnab.domain.repository
 
-import com.ebcf.jnab.domain.model.AuthError
+import com.ebcf.jnab.domain.model.LoginResult
 
 interface AuthRepository {
 
     fun login(
         email: String,
         password: String,
-        onSuccess: (role: String) -> Unit,
-        onError: (error: AuthError) -> Unit
+        onResult: (LoginResult) -> Unit
     )
 
     fun logout()
