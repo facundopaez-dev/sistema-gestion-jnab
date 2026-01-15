@@ -45,6 +45,7 @@ android {
 
 dependencies {
     implementation(libs.firebase.storage.ktx)
+    implementation(libs.androidx.compose.runtime.livedata)
     val nav_version = "2.8.9"
 
     // Jetpack Compose integration
