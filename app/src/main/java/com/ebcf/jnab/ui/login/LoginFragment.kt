@@ -4,27 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.util.Patterns
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.ebcf.jnab.R
-import com.ebcf.jnab.databinding.FragmentLoginBinding
 import com.ebcf.jnab.domain.model.AuthError
-import com.ebcf.jnab.util.FieldValidator
-import com.ebcf.jnab.util.ERROR_INVALID_PASSWORD
-import com.ebcf.jnab.util.ERROR_INVALID_EMAIL
-import com.ebcf.jnab.util.MIN_PASSWORD_LENGTH
 
-private const val INVALID_CREDENTIALS = "Correo electrónico o contraseña incorrectos"
-private const val ERROR_GENERIC = "Error al iniciar sesión. Por favor, inténtelo más tarde."
+private const val INVALID_CREDENTIALS =
+    "Correo electrónico o contraseña incorrectos"
+private const val ERROR_GENERIC =
+    "Error al iniciar sesión. Por favor, inténtelo más tarde."
 
 class LoginFragment : Fragment() {
-
-    private var _binding: FragmentLoginBinding? = null
-    private val binding get() = _binding!!
 
     private lateinit var viewModel: LoginViewModel
 
@@ -33,41 +27,32 @@ class LoginFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        return binding.root
+
+        viewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
+
+        return ComposeView(requireContext()).apply {
+            setViewCompositionStrategy(
+                ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
+            )
+            setContent {
+                LoginScreen(
+                    viewModel = viewModel,
+                    onSignupClick = {
+                        findNavController()
+                            .navigate(R.id.action_loginFragment_to_signupFragment)
+                    },
+                    onForgotPasswordClick = {
+                        findNavController()
+                            .navigate(R.id.action_loginFragment_to_passwordRecoveryFragment)
+                    }
+                )
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
-
-        setupFocusListeners()
-        setupClearErrorOnTextChange()
-
-        binding.loginButton.setOnClickListener {
-            val email = binding.emailAddressField.text.toString().trim()
-            val password = binding.passwordField.text.toString().trim()
-
-            if (validateAllFields()) {
-                viewModel.login(email, password)
-            }
-        }
-
-        binding.signupButton.setOnClickListener {
-            findNavController()
-                .navigate(R.id.action_loginFragment_to_signupFragment)
-        }
-
-        binding.forgotPasswordButton.setOnClickListener {
-            findNavController()
-                .navigate(R.id.action_loginFragment_to_passwordRecoveryFragment)
-        }
-
-        observeViewModel()
-    }
-
-    private fun observeViewModel() {
         viewModel.loginError.observe(viewLifecycleOwner) { error ->
             val message = when (error) {
                 AuthError.InvalidCredentials -> INVALID_CREDENTIALS
@@ -79,91 +64,4 @@ class LoginFragment : Fragment() {
                 .show()
         }
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    /**
-     * Valida todos los campos del formulario de inicio de sesion.
-     *
-     * Esta funcion verifica que cada campo cumpla con sus criterios de validacion específicos,
-     * mostrando mensajes de error correspondientes en los TextInputLayout asociados.
-     *
-     * @return `true` si todos los campos son validos, `false` si alguno no cumple la validacion.
-     */
-    private fun validateAllFields(): Boolean {
-        val email = binding.emailAddressField.text.toString().trim()
-        val password = binding.passwordField.text.toString()
-
-        val isEmailValid = FieldValidator.validateField(
-            Patterns.EMAIL_ADDRESS.matcher(email).matches(),
-            binding.emailInputLayout,
-            ERROR_INVALID_EMAIL
-        )
-
-        val isPasswordValid = FieldValidator.validateField(
-            password.length >= MIN_PASSWORD_LENGTH,
-            binding.passwordInputLayout,
-            ERROR_INVALID_PASSWORD
-        )
-
-        return isEmailValid && isPasswordValid
-    }
-
-    /**
-     * Configura listeners para los cambios de foco en los campos de entrada.
-     *
-     * Cada vez que un campo pierde el foco (cuando el usuario termina de editarlo),
-     * se valida el contenido actual y, si es invalido, se muestra un mensaje de error
-     * en el `TextInputLayout` correspondiente.
-     *
-     * Esto permite una validacion en tiempo real que guía al usuario mientras completa
-     * el formulario.
-     */
-    private fun setupFocusListeners() {
-        binding.emailAddressField.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) {
-                val email = binding.emailAddressField.text.toString().trim()
-                FieldValidator.validateField(
-                    Patterns.EMAIL_ADDRESS.matcher(email).matches(),
-                    binding.emailInputLayout,
-                    ERROR_INVALID_EMAIL
-                )
-            }
-        }
-
-        binding.passwordField.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) {
-                val password = binding.passwordField.text.toString()
-                FieldValidator.validateField(
-                    password.length >= MIN_PASSWORD_LENGTH,
-                    binding.passwordInputLayout,
-                    ERROR_INVALID_PASSWORD
-                )
-            }
-        }
-    }
-
-    /**
-     * Configura listeners para que, cuando el usuario modifique el texto en cualquiera
-     * de los campos de entrada, se borre el mensaje de error correspondiente en el
-     * `TextInputLayout` asociado.
-     *
-     * Esto mejora la experiencia de usuario al eliminar los errores visibles en cuanto
-     * el usuario comienza a corregir el campo.
-     */
-    private fun setupClearErrorOnTextChange() {
-        binding.emailAddressField.addTextChangedListener {
-            binding.emailInputLayout.error = null
-            binding.emailInputLayout.isErrorEnabled = false
-        }
-
-        binding.passwordField.addTextChangedListener {
-            binding.passwordInputLayout.error = null
-            binding.passwordInputLayout.isErrorEnabled = false
-        }
-    }
-
 }
