@@ -7,13 +7,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
 import com.ebcf.jnab.util.ERROR_INVALID_EMAIL
 import com.ebcf.jnab.util.ERROR_INVALID_PASSWORD
 import com.ebcf.jnab.util.MIN_PASSWORD_LENGTH
 
+/**
+ * UI pura (sin ViewModel)
+ */
 @Composable
-fun LoginScreen(
-    viewModel: LoginViewModel,
+fun LoginContent(
+    onLoginClick: (String, String) -> Unit,
     onSignupClick: () -> Unit,
     onForgotPasswordClick: () -> Unit
 ) {
@@ -34,7 +38,7 @@ fun LoginScreen(
             value = email,
             onValueChange = {
                 email = it
-                emailError = null   // equivalente a clearErrorOnTextChange
+                emailError = null
             },
             label = { Text("Correo electrónico") },
             isError = emailError != null,
@@ -79,7 +83,7 @@ fun LoginScreen(
                     if (!isPasswordValid) ERROR_INVALID_PASSWORD else null
 
                 if (isEmailValid && isPasswordValid) {
-                    viewModel.login(email.trim(), password.trim())
+                    onLoginClick(email.trim(), password.trim())
                 }
             }
         ) {
@@ -89,11 +93,48 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(8.dp))
 
         TextButton(onClick = onForgotPasswordClick) {
-            Text("¿Olvido su contraseña?")
+            Text("¿Olvidó su contraseña?")
         }
 
         TextButton(onClick = onSignupClick) {
             Text("Registrarse")
         }
+    }
+}
+
+/**
+ * Conecta la UI con el ViewModel
+ */
+@Composable
+fun LoginScreen(
+    viewModel: LoginViewModel,
+    onSignupClick: () -> Unit,
+    onForgotPasswordClick: () -> Unit
+) {
+    LoginContent(
+        onLoginClick = { email, password ->
+            viewModel.login(email, password)
+        },
+        onSignupClick = onSignupClick,
+        onForgotPasswordClick = onForgotPasswordClick
+    )
+}
+
+/**
+ * Preview sin ViewModel
+ */
+@Preview(
+    showBackground = true,
+    showSystemUi = true,
+    name = "LoginScreen Preview"
+)
+@Composable
+fun LoginScreenPreview() {
+    MaterialTheme {
+        LoginContent(
+            onLoginClick = { _, _ -> },
+            onSignupClick = {},
+            onForgotPasswordClick = {}
+        )
     }
 }
