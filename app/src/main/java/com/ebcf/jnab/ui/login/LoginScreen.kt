@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
+import com.ebcf.jnab.ui.theme.SistemaGestionJnabTheme
 import com.ebcf.jnab.util.ERROR_INVALID_EMAIL
 import com.ebcf.jnab.util.ERROR_INVALID_PASSWORD
 import com.ebcf.jnab.util.MIN_PASSWORD_LENGTH
@@ -131,6 +132,21 @@ fun LoginScreen(
 @Composable
 fun LoginScreenPreview() {
     MaterialTheme {
+        LoginContent(
+            onLoginClick = { _, _ -> },
+            onSignupClick = {},
+            onForgotPasswordClick = {}
+        )
+    }
+}
+
+@Preview(
+    showBackground = true,
+    uiMode = android.content.res.Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+fun LoginDarkPreview() {
+    SistemaGestionJnabTheme(dynamicColor = false) {
         LoginContent(
             onLoginClick = { _, _ -> },
             onSignupClick = {},
