@@ -31,16 +31,23 @@ class AuthRepositoryImpl(
 
                 val firebaseUser = remoteDataSource.auth.currentUser
 
-                if (firebaseUser == null || !firebaseUser.isEmailVerified) {
+                if (firebaseUser == null) {
                     onResult(LoginResult.Error(AuthError.InvalidCredentials))
                     return@addOnCompleteListener
                 }
+
+                // Eliminamos temporalmente la verificación obligatoria de email para permitir el login
+                // if (!firebaseUser.isEmailVerified) { ... }
 
                 FirebaseFirestoreProvider.provide()
                     .collection(USERS)
                     .document(firebaseUser.uid)
                     .get()
                     .addOnSuccessListener { doc ->
+                        if (!doc.exists()) {
+                            onResult(LoginResult.Error(AuthError.GenericError))
+                            return@addOnSuccessListener
+                        }
 
                         val email = doc.getString(EMAIL)
                         val firstName = doc.getString(FIRST_NAME)
