@@ -61,6 +61,7 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:text="@string/text_forgot_password_link"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="14sp" />
 
         <Button
@@ -78,6 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/text_no_account_register"
+            android:textColor="?attr/colorOnSurface"
             android:textSize="14sp" />
     </LinearLayout>
 

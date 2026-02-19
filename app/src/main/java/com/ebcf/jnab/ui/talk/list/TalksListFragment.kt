@@ -27,7 +27,7 @@ class TalksListFragment : Fragment() {
 
         return ComposeView(requireContext()).apply {
             setContent {
-                SistemaGestionJnabTheme {
+                SistemaGestionJnabTheme(dynamicColor = false) {
                     TalksListScreen(
                         viewModel = talksListViewModel,
                         onFilterClick = {

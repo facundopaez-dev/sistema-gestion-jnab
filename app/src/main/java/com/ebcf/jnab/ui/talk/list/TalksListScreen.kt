@@ -2,7 +2,6 @@ package com.ebcf.jnab.ui.talk.list
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -34,15 +33,20 @@ fun TalksListScreen(
     val favoriteIds = displayData.second
 
     Scaffold(
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
             TopAppBar(
                 title = { Text("Charlas") },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.background,
+                    titleContentColor = MaterialTheme.colorScheme.secondary
+                ),
                 actions = {
                     IconButton(onClick = onFilterClick) {
                         Icon(
                             painter = painterResource(id = R.drawable.baseline_filter_list_alt_24),
                             contentDescription = "Filtrar",
-                            tint = MaterialTheme.colorScheme.onSurface
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     }
                 }

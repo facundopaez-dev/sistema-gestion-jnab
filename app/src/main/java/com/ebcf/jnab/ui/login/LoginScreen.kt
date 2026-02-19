@@ -112,13 +112,20 @@ fun LoginScreen(
     onSignupClick: () -> Unit,
     onForgotPasswordClick: () -> Unit
 ) {
-    LoginContent(
-        onLoginClick = { email, password ->
-            viewModel.login(email, password)
-        },
-        onSignupClick = onSignupClick,
-        onForgotPasswordClick = onForgotPasswordClick
-    )
+    SistemaGestionJnabTheme(dynamicColor = false) {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            LoginContent(
+                onLoginClick = { email, password ->
+                    viewModel.login(email, password)
+                },
+                onSignupClick = onSignupClick,
+                onForgotPasswordClick = onForgotPasswordClick
+            )
+        }
+    }
 }
 
 /**
@@ -131,7 +138,7 @@ fun LoginScreen(
 )
 @Composable
 fun LoginScreenPreview() {
-    MaterialTheme {
+    SistemaGestionJnabTheme(dynamicColor = false) {
         LoginContent(
             onLoginClick = { _, _ -> },
             onSignupClick = {},

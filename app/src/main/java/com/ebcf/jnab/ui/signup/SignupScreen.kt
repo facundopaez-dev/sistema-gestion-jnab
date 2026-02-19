@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ebcf.jnab.ui.theme.SistemaGestionJnabTheme
 import com.google.android.material.snackbar.Snackbar
 
 /* -------------------- */
@@ -54,49 +55,56 @@ fun SignupScreen(
         }
     }
 
-    SignupContent(
-        uiState = uiState,
-        signupState = signupState,
-        onFirstNameChange = {
-            uiState = uiState.copy(firstName = it, firstNameError = null)
-        },
-        onLastNameChange = {
-            uiState = uiState.copy(lastName = it, lastNameError = null)
-        },
-        onEmailChange = {
-            uiState = uiState.copy(email = it, emailError = null)
-        },
-        onPasswordChange = {
-            uiState = uiState.copy(password = it, passwordError = null)
-        },
-        onConfirmPasswordChange = {
-            uiState = uiState.copy(confirmPassword = it)
-            uiState = uiState.validateConfirmPassword()
-        },
-        onFirstNameFocusLost = { uiState = uiState.validateFirstName() },
-        onLastNameFocusLost = { uiState = uiState.validateLastName() },
-        onEmailFocusLost = { uiState = uiState.validateEmail() },
-        onPasswordFocusLost = { uiState = uiState.validatePassword() },
-        onConfirmPasswordFocusLost = { uiState = uiState.validateConfirmPassword() },
-        onSignupClick = {
-            uiState = uiState
-                .validateFirstName()
-                .validateLastName()
-                .validateEmail()
-                .validatePassword()
-                .validateConfirmPassword()
+    SistemaGestionJnabTheme(dynamicColor = false) {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            SignupContent(
+                uiState = uiState,
+                signupState = signupState,
+                onFirstNameChange = {
+                    uiState = uiState.copy(firstName = it, firstNameError = null)
+                },
+                onLastNameChange = {
+                    uiState = uiState.copy(lastName = it, lastNameError = null)
+                },
+                onEmailChange = {
+                    uiState = uiState.copy(email = it, emailError = null)
+                },
+                onPasswordChange = {
+                    uiState = uiState.copy(password = it, passwordError = null)
+                },
+                onConfirmPasswordChange = {
+                    uiState = uiState.copy(confirmPassword = it)
+                    uiState = uiState.validateConfirmPassword()
+                },
+                onFirstNameFocusLost = { uiState = uiState.validateFirstName() },
+                onLastNameFocusLost = { uiState = uiState.validateLastName() },
+                onEmailFocusLost = { uiState = uiState.validateEmail() },
+                onPasswordFocusLost = { uiState = uiState.validatePassword() },
+                onConfirmPasswordFocusLost = { uiState = uiState.validateConfirmPassword() },
+                onSignupClick = {
+                    uiState = uiState
+                        .validateFirstName()
+                        .validateLastName()
+                        .validateEmail()
+                        .validatePassword()
+                        .validateConfirmPassword()
 
-            if (uiState.isFormValid()) {
-                viewModel.signup(
-                    uiState.email.trim(),
-                    uiState.password,
-                    uiState.firstName.trim(),
-                    uiState.lastName.trim()
-                )
-            }
-        },
-        onNavigateToLogin = onNavigateToLogin
-    )
+                    if (uiState.isFormValid()) {
+                        viewModel.signup(
+                            uiState.email.trim(),
+                            uiState.password,
+                            uiState.firstName.trim(),
+                            uiState.lastName.trim()
+                        )
+                    }
+                },
+                onNavigateToLogin = onNavigateToLogin
+            )
+        }
+    }
 }
 
 /* -------------------- */
@@ -190,7 +198,7 @@ fun SignupContent(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun SignupScreenPreview() {
-    MaterialTheme {
+    SistemaGestionJnabTheme(dynamicColor = false) {
         SignupContent(
             uiState = SignupUiState(
                 firstName = "John",
